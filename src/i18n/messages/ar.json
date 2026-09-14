@@ -1,0 +1,6 @@
+{
+  "header": {
+    "links": { "home": "الرئيسية", "products": "المنتجات" },
+    "themes": { "system": "النظام", "dark": "داكن", "light": "فاتح" }
+  }
+}

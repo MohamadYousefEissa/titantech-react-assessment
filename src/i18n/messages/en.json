@@ -1,0 +1,6 @@
+{
+  "header": {
+    "links": { "home": "Home", "products": "Products" },
+    "themes": { "system": "System", "dark": "Dark", "light": "Light" }
+  }
+}
