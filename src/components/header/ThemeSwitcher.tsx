@@ -2,12 +2,13 @@ import {
   IconButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
   useColorScheme,
 } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
-import Contrast from "@mui/icons-material/Contrast";
+import Palette from "@mui/icons-material/Palette";
 import Monitor from "@mui/icons-material/DesktopWindows";
 import Moon from "@mui/icons-material/DarkMode";
 import Sun from "@mui/icons-material/LightMode";
@@ -19,10 +20,10 @@ type AppTheme = "system" | "dark" | "light";
 const THEMES = [
   {
     value: "system",
-    icon: <Monitor fontSize="small" />,
+    icon: <Monitor style={{ fontSize: "20px" }} />,
   },
-  { value: "dark", icon: <Moon fontSize="small" /> },
-  { value: "light", icon: <Sun fontSize="small" /> },
+  { value: "dark", icon: <Moon style={{ fontSize: "20px" }} /> },
+  { value: "light", icon: <Sun style={{ fontSize: "20px" }} /> },
 ] as const;
 
 export default function ThemeSwitcher() {
@@ -47,22 +48,18 @@ export default function ThemeSwitcher() {
 
   return (
     <div>
-      <IconButton
-        aria-haspopup="true"
-        aria-expanded={open}
-        color="inherit"
-        onClick={handleOpen}
-      >
-        <Contrast />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-        slotProps={{
-          paper: { className: "dark:bg-black!" },
-        }}
-      >
+      <Tooltip title={t("header.theme")}>
+        <IconButton
+          aria-haspopup="true"
+          aria-expanded={open}
+          color="inherit"
+          onClick={handleOpen}
+        >
+          <Palette fontSize="small" />
+        </IconButton>
+      </Tooltip>
+
+      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
         {THEMES.map((th) => (
           <MenuItem
             key={th.value}
@@ -78,7 +75,9 @@ export default function ThemeSwitcher() {
               }}
             >
               {t(`header.themes.${th.value}`)}
-              {th.value === mode && <Check fontSize="small" color="action" />}
+              {th.value === mode && (
+                <Check color="action" style={{ fontSize: "16px" }} />
+              )}
             </ListItemText>
           </MenuItem>
         ))}

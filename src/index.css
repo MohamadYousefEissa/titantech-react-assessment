@@ -3,28 +3,23 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  /* Material UI typography */
-  --font-h1: var(--mui-font-h1);
-  --font-h2: var(--mui-font-h2);
-  --font-h3: var(--mui-font-h3);
-  --font-h4: var(--mui-font-h4);
-  --font-h5: var(--mui-font-h5);
-  --font-h6: var(--mui-font-h6);
-  --font-subtitle1: var(--mui-font-subtitle1);
-  --font-subtitle2: var(--mui-font-subtitle2);
-  --font-body1: var(--mui-font-body1);
-  --font-body2: var(--mui-font-body2);
-  --font-button: var(--mui-font-button);
-  --font-caption: var(--mui-font-caption);
-  --font-overline: var(--mui-font-overline);
+.light {
+  --muted: var(--color-gray-600);
+  --bg-secondary: var(--color-gray-50);
+}
 
-  --letter-spacing-h1: -0.01562em;
-  --letter-spacing-h2: -0.00833em;
-  --letter-spacing-h4: 0.00735em;
-  --letter-spacing-h6: 0.0075em;
-  --letter-spacing-body1: 0.00938em;
-  --letter-spacing-body2: 0.01071em;
+.dark {
+  --muted: var(--color-text-disabled);
+  --bg-secondary: rgba(0, 0, 0, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme inline {
+  --color-muted: var(--muted);
+  --color-background-secondary: var(--bg-secondary);
 
   /* Material UI breakpoints */
   --breakpoint-sm: 37.5rem; /* 600px */
@@ -263,40 +258,6 @@
   --overlay-22: var(--mui-overlays-22);
   --overlay-23: var(--mui-overlays-23);
   --overlay-24: var(--mui-overlays-24);
-}
-
-/* Material UI base styles */
-@layer base {
-  h1 {
-    font: var(--mui-font-h1);
-    letter-spacing: -0.01562em;
-  }
-  h2 {
-    font: var(--mui-font-h2);
-    letter-spacing: -0.00833em;
-  }
-  h3 {
-    font: var(--mui-font-h3);
-  }
-  h4 {
-    font: var(--mui-font-h4);
-    letter-spacing: 0.00735em;
-  }
-  h5 {
-    font: var(--mui-font-h5);
-  }
-  h6 {
-    font: var(--mui-font-h6);
-    letter-spacing: 0.0075em;
-  }
-  p {
-    font: var(--mui-font-body1);
-    letter-spacing: 0.00938em;
-  }
-  span {
-    font: var(--mui-font-body2);
-    letter-spacing: 0.01071em;
-  }
 }
 
 /* Material UI typography utilities */

@@ -1,6 +1,24 @@
 {
   "header": {
     "links": { "home": "الرئيسية", "products": "المنتجات" },
-    "themes": { "system": "النظام", "dark": "داكن", "light": "فاتح" }
+    "themes": { "system": "النظام", "dark": "داكن", "light": "فاتح" },
+    "login": "تسجيل دخول",
+    "theme": "المظهر",
+    "language": "اللغة"
+  },
+
+  "home": {
+    "hero": {
+      "everything": "كل ما تحتاجه",
+      "delivered": "سيصل إلى باب منزلك",
+      "description": "اكتشف آلاف المنتجات الأعلى تقييمًا مع شحن مجاني لمدة يومين للطلبات التي تزيد قيمتها عن 50 دولارًا أمريكيًا وإمكانية إرجاع سهلة.",
+      "view-products-btn": "عرض المنتجات",
+      "browse-btn": "تصفح الفئات"
+    },
+    "categories-section": { "title": "فئات ستُحبها" }
+  },
+  "product-card": {
+    "add-to-cart": "إضافة إلى العربة",
+    "view-btn": "عرض التفاصيل"
   }
 }

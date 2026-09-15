@@ -1,20 +1,17 @@
 import { LOCALES_DATA } from "@/data/constant";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
+import { IconButton, Tooltip } from "@mui/material";
+import LanguageIcon from "@mui/icons-material/Language";
 
 export default function LanguageSelector() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  const selectedLocale =
-    LOCALES_DATA.find((loc) => loc.code === i18n.language) || LOCALES_DATA[0];
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -31,28 +28,17 @@ export default function LanguageSelector() {
 
   return (
     <div>
-      <Button
-        aria-haspopup="true"
-        aria-expanded={open}
-        color="inherit"
-        style={{ textTransform: "none" }}
-        endIcon={
-          <KeyboardArrowDownIcon
-            className={`transition-transform! duration-200 ${open ? "rotate-180" : ""}`}
-          />
-        }
-        onClick={handleOpen}
-      >
-        {selectedLocale.label}
-      </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-        slotProps={{
-          paper: { className: "dark:bg-black!" },
-        }}
-      >
+      <Tooltip title={t("header.language")}>
+        <IconButton
+          aria-haspopup="true"
+          aria-expanded={open}
+          color="inherit"
+          onClick={handleOpen}
+        >
+          <LanguageIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
         {LOCALES_DATA.map((loc) => (
           <MenuItem
             key={loc.code}
@@ -62,7 +48,7 @@ export default function LanguageSelector() {
             <div className="flex text-sm! items-center gap-4">
               {loc.label}
               {loc.code === i18n.language && (
-                <Check fontSize="small" color="action" />
+                <Check color="action" style={{ fontSize: "16px" }} />
               )}
             </div>
           </MenuItem>

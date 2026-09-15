@@ -1,6 +1,24 @@
 {
   "header": {
     "links": { "home": "Home", "products": "Products" },
-    "themes": { "system": "System", "dark": "Dark", "light": "Light" }
+    "themes": { "system": "System", "dark": "Dark", "light": "Light" },
+    "login": "Login",
+    "theme": "Theme",
+    "language": "Language"
+  },
+
+  "home": {
+    "hero": {
+      "everything": "Everything You Need",
+      "delivered": "Delivered to Your Door.",
+      "description": "Discover thousands of top-rated items with free 2-day shipping on orders over $50 and hassle-free returns",
+      "view-products-btn": "View Products",
+      "browse-btn": "Browse Categories"
+    },
+    "categories-section": { "title": "Categories You'll Love" }
+  },
+  "product-card": {
+    "add-to-cart": "Add to cart",
+    "view-btn": "View details"
   }
 }
