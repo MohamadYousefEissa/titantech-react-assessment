@@ -1,16 +1,12 @@
-import React from "react";
 import { Alert, AlertTitle, Box, Paper, Typography } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import { useTranslation } from "react-i18next";
 
-interface ApiErrorFallbackProps {
-  title?: string;
-}
+export const ApiErrorFallback = () => {
+  const { t } = useTranslation();
 
-export const ApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({
-  title = "Failed to load data",
-}) => {
   return (
-    <Box component="div" className="py-10">
+    <Box component="div">
       <Paper
         elevation={0}
         variant="outlined"
@@ -34,11 +30,11 @@ export const ApiErrorFallback: React.FC<ApiErrorFallbackProps> = ({
             },
           }}
         >
-          <AlertTitle sx={{ fontWeight: 600 }}>{title}</AlertTitle>
+          <AlertTitle sx={{ fontWeight: 600 }}>
+            {t("errors.main.title")}
+          </AlertTitle>
           <Typography variant="body2" color="error.dark">
-            {
-              "An unexpected error occurred while communicating with the server."
-            }
+            {t("errors.main.description")}
           </Typography>
         </Alert>
       </Paper>

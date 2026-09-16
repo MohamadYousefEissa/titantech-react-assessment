@@ -1,4 +1,21 @@
 {
+  "empty": {
+    "products": {
+      "title": "لا توجد منتجات",
+      "description": "لم نتمكن من العثور على أي منتجات تطابق اختيارك. يرجى محاولة تعديل الفلاتر أو البحث عن شيء آخر."
+    },
+    "categories": {
+      "title": "لا توجد فئات"
+    }
+  },
+
+  "errors": {
+    "main": {
+      "title": "فشل في تحميل البيانات",
+      "description": "حدث خطأ غير متوقع أثناء الاتصال بالخادم. يرجى المحاولة مرة أخرى أو تحديث الصفحة."
+    }
+  },
+
   "header": {
     "links": { "home": "الرئيسية", "products": "المنتجات" },
     "themes": { "system": "النظام", "dark": "داكن", "light": "فاتح" },
@@ -17,8 +34,61 @@
     },
     "categories-section": { "title": "فئات ستُحبها" }
   },
+
+  "products-page": {
+    "title": "استكشف <highlight>منتجاتنا</highlight>",
+    "description": "اكتشف تشكيلة مختارة بعناية من المنتجات العالية الجودة المصممة لتلبية احتياجاتك. قم بالتصفية حسب الفئة، وقارن المزايا، واعثر على ما تبحث عنه بالضبط بكل سهولة.",
+    "search-input": { "placeholder": "إبحث عن منتج..." },
+    "pagination-text": "عرض {{start}}-{{end}} من {{total}} منتج",
+    "filters": "الفلاتر",
+    "sort": {
+      "oldest": "الأقدم",
+      "newest": "الأحدث",
+      "asc": "الاسم (أ - ي)",
+      "desc": "الاسم (ي - أ)"
+    }
+  },
+
   "product-card": {
     "add-to-cart": "إضافة إلى العربة",
     "view-btn": "عرض التفاصيل"
+  },
+
+  "preference-dialog": {
+    "title": "خصص تجربتك",
+    "description": "حدد تفضيلاتك حتى نتمكن من عرض المحتوى الأكثر ملاءمة لك.",
+    "preference": "التفضيل",
+    "male": "ذكر",
+    "female": "أنثى",
+    "confirm": "تأكيد",
+    "skip": "تخطي"
+  },
+
+  "categories": {
+    "all": "كل الفئات",
+    "beauty": "الجمال",
+    "fragrances": "عطور",
+    "furniture": "الأثاث",
+    "groceries": "البقالة",
+    "home-decoration": "ديكور المنزل",
+    "kitchen-accessories": "مستلزمات المطبخ",
+    "laptops": "أجهزة لابتوب",
+    "mens-shirts": "قمصان رجالية",
+    "mens-shoes": "أحذية رجالية",
+    "mens-watches": "ساعات رجالية",
+    "mobile-accessories": "إكسسوارات الهواتف",
+    "motorcycle": "دراجات نارية",
+    "skin-care": "العناية بالبشرة",
+    "smartphones": "هواتف ذكية",
+    "sports-accessories": "إكسسوارات رياضية",
+    "sunglasses": "نظارات شمسية",
+    "tablets": "أجهزة لوحية",
+    "tops": "بلوزات وقمصان نسائية",
+    "vehicle": "مركبات",
+    "womens-bags": "حقائب نسائية",
+    "womens-dresses": "فساتين نسائية",
+    "womens-jewellery": "مجوهرات نسائية",
+    "womens-shoes": "أحذية نسائية",
+    "womens-watches": "ساعات نسائية"
   }
 }

@@ -1,4 +1,21 @@
 {
+  "empty": {
+    "products": {
+      "title": "No Products Found",
+      "description": "We couldn't find any products matching your selection. Try adjusting your filters or searching for something else."
+    },
+    "categories": {
+      "title": "No Categories Found"
+    }
+  },
+
+  "errors": {
+    "main": {
+      "title": "Failed to load data",
+      "description": "An unexpected error occurred while communicating with the server."
+    }
+  },
+
   "header": {
     "links": { "home": "Home", "products": "Products" },
     "themes": { "system": "System", "dark": "Dark", "light": "Light" },
@@ -17,8 +34,61 @@
     },
     "categories-section": { "title": "Categories You'll Love" }
   },
+
+  "products-page": {
+    "title": "Explore <highlight>Our Products</highlight>",
+    "description": "Discover a curated selection of quality items tailored to your needs. Filter by category, compare features, and find exactly what you are looking for with ease.",
+    "search-input": { "placeholder": "Search for a product..." },
+    "pagination-text": "Showing {{start}}-{{end}} of {{total}} products",
+    "filters": "Filters",
+    "sort": {
+      "oldest": "Oldest",
+      "newest": "Newest",
+      "asc": "Name (A-Z)",
+      "desc": "Name (Z-A)"
+    }
+  },
+
   "product-card": {
     "add-to-cart": "Add to cart",
     "view-btn": "View details"
+  },
+
+  "preference-dialog": {
+    "title": "Tailor Your Experience",
+    "description": "Select your preference so we can surface the most relevant content for you.",
+    "preference": "Preference",
+    "male": "Male",
+    "female": "Female",
+    "confirm": "Confirm",
+    "skip": "Skip"
+  },
+
+  "categories": {
+    "all": "All Categories",
+    "beauty": "Beauty",
+    "fragrances": "Fragrances",
+    "furniture": "Furniture",
+    "groceries": "Groceries",
+    "home-decoration": "Home Decoration",
+    "kitchen-accessories": "Kitchen Accessories",
+    "laptops": "Laptops",
+    "mens-shirts": "Men's Shirts",
+    "mens-shoes": "Men's Shoes",
+    "mens-watches": "Men's Watches",
+    "mobile-accessories": "Mobile Accessories",
+    "motorcycle": "Motorcycles",
+    "skin-care": "Skin Care",
+    "smartphones": "Smartphones",
+    "sports-accessories": "Sports Accessories",
+    "sunglasses": "Sunglasses",
+    "tablets": "Tablets",
+    "tops": "Tops",
+    "vehicle": "Vehicles",
+    "womens-bags": "Women's Bags",
+    "womens-dresses": "Women's Dresses",
+    "womens-jewellery": "Women's Jewellery",
+    "womens-shoes": "Women's Shoes",
+    "womens-watches": "Women's Watches"
   }
 }

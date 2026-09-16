@@ -36,8 +36,6 @@ export const PreferenceProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <PreferenceContext.Provider value={{ data, setData }}>
-      {children}
-    </PreferenceContext.Provider>
+    <PreferenceContext value={{ data, setData }}>{children}</PreferenceContext>
   );
 };

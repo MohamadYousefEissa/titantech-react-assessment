@@ -1,20 +1,18 @@
-import type { Product } from "@/@types/product";
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
 import { Skeleton } from "@mui/material";
-import GridIcon from "@mui/icons-material/GridOff";
 import { ApiErrorFallback } from "@/components/ErrorFallback";
+import { useGetProductsByCategoryQuery } from "@/services/products";
+import { useTranslation } from "react-i18next";
+import { ProductsEmptyFallback } from "@/features/products/components/EmptyFallback";
 
-export const HomeCategorySection = ({
-  slug = "",
-  products,
-  isLoading,
-  isError,
-}: {
-  slug: string | undefined;
-  products: Product[];
-  isLoading: boolean;
-  isError: boolean;
-}) => {
+export const HomeCategorySection = ({ slug }: { slug: string }) => {
+  const { t } = useTranslation();
+
+  const { data, isLoading, isError } = useGetProductsByCategoryQuery({
+    slug,
+    limit: 6,
+  });
+
   if (isLoading)
     return (
       <div className="py-10">
@@ -27,27 +25,22 @@ export const HomeCategorySection = ({
       </div>
     );
 
-  if (products.length === 0)
-    return (
-      <div className="py-10 h-[40vh] flex flex-col gap-4 justify-center items-center">
-        <GridIcon fontSize="large" />
-        <p className="text-xl font-medium">No Products</p>
-      </div>
-    );
-
   if (isError) return <ApiErrorFallback />;
 
+  if (data?.products.length === 0) return <ProductsEmptyFallback />;
+
   return (
-    <section id={slug} className="py-10">
-      <p className="text-xl font-bold mt-10 border-b-4 uppercase border-primary border-dotted w-fit">
-        {slug.replaceAll("-", " ")}
+    <>
+      <p className="text-xl font-bold uppercase w-fit">
+        {/* @ts-expect-error No type defined for slug */}
+        {t(`categories.${slug}`)}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-        {products.map((p) => (
+        {data?.products.map((p) => (
           <ProductCard key={p.id} product={p} />
         ))}
       </div>
-    </section>
+    </>
   );
 };

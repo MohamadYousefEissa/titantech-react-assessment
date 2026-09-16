@@ -1,14 +1,14 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { ProductsApiResponse } from "@/@types/product";
+import type { ProductSort } from "@/features/products/ProductsSlice";
 
-// Define a service using a base URL and expected endpoints
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_API_URL}/products`,
   }),
   endpoints: (builder) => ({
+    // for get products by category (used in home page)
     getProductsByCategory: builder.query<
       ProductsApiResponse,
       { slug: string; limit?: number }
@@ -21,9 +21,54 @@ export const productsApi = createApi({
         return `category/${slug}?${params.toString()}`;
       },
     }),
+
+    // for search and filter products (used in producs page)
+    searchForProducts: builder.query<
+      ProductsApiResponse,
+      {
+        limit?: number;
+        skip?: number;
+        search: string;
+        category?: string;
+        sort?: ProductSort;
+      }
+    >({
+      query: ({ limit, skip, search, category, sort }) => {
+        const params = new URLSearchParams();
+
+        let path = "search";
+
+        if (limit) params.set("limit", limit.toString());
+        if (skip) params.set("skip", skip.toString());
+        if (search) params.set("q", search.toString());
+        if (sort === "oldest") {
+          params.set("sortBy", "id");
+          params.set("order", "asc");
+        } else if (sort === "newest") {
+          params.set("sortBy", "id");
+          params.set("order", "desc");
+        } else if (sort === "asc") {
+          params.set("sortBy", "title");
+          params.set("order", "asc");
+        } else if (sort === "desc") {
+          params.set("sortBy", "title");
+          params.set("order", "desc");
+        }
+        if (category) path = `category/${category}`;
+
+        return `${path}?${params.toString()}`;
+      },
+      keepUnusedDataFor: 0, // Disable cache
+    }),
+
+    getCategories: builder.query<string[], void>({
+      query: () => "category-list",
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetProductsByCategoryQuery } = productsApi;
+export const {
+  useGetProductsByCategoryQuery,
+  useSearchForProductsQuery,
+  useGetCategoriesQuery,
+} = productsApi;

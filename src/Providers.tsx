@@ -10,45 +10,6 @@ import { store } from "@/store/store";
 import { Provider } from "react-redux";
 import { PreferenceProvider } from "./contexts/preference-context";
 
-const theme = createTheme({
-  colorSchemes: {
-    dark: true,
-  },
-  cssVariables: { colorSchemeSelector: "class" },
-
-  typography: {
-    fontFamily: ["Roboto", "NotoKufi", "sans-serif"].join(","),
-    button: {
-      textTransform: "none", // Remove all-caps text on buttons
-      fontWeight: 400,
-    },
-    allVariants: { borderRadius: "8px" },
-  },
-
-  shape: { borderRadius: "12px" },
-
-  components: {
-    MuiMenu: {
-      defaultProps: {
-        classes: { paper: "dark:bg-black!" },
-      },
-      styleOverrides: {
-        list: {
-          display: "flex",
-          flexDirection: "column",
-          padding: "6px",
-          gap: "2px",
-        },
-      },
-    },
-    MuiDialog: {
-      defaultProps: {
-        classes: { paper: "dark:bg-black!" },
-      },
-    },
-  },
-});
-
 const rtlCache = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
@@ -74,3 +35,50 @@ export default function Providers({ children }: { children: ReactNode }) {
     </Provider>
   );
 }
+
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+  cssVariables: { colorSchemeSelector: "class" },
+
+  typography: {
+    fontFamily: ["Roboto", "NotoKufi", "sans-serif"].join(","),
+    button: {
+      textTransform: "none", // Remove all-caps text on buttons
+      fontWeight: 400,
+    },
+    allVariants: { borderRadius: "8px" },
+  },
+
+  shape: { borderRadius: "12px" },
+
+  components: {
+    MuiAutocomplete: {
+      styleOverrides: {
+        listbox: { display: "grid", gap: "3px", padding: "6px" },
+        option: {
+          borderRadius: "8px",
+        },
+      },
+    },
+    MuiMenu: {
+      defaultProps: {
+        classes: { paper: "dark:bg-black!" },
+      },
+      styleOverrides: {
+        list: {
+          display: "flex",
+          flexDirection: "column",
+          padding: "6px",
+          gap: "3px",
+        },
+      },
+    },
+    MuiDialog: {
+      defaultProps: {
+        classes: { paper: "dark:bg-black!" },
+      },
+    },
+  },
+});

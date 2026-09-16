@@ -13,8 +13,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const PreferenceDialog = () => {
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [gender, setGender] = useState("");
   const { setData } = useContext(PreferenceContext);
@@ -45,23 +48,24 @@ export const PreferenceDialog = () => {
   return (
     <Dialog
       open={open}
-      aria-labelledby="preference-dialog-title"
-      aria-describedby="preference-dialog-description"
+      aria-labelledby={t("preference-dialog.title")}
+      aria-describedby={t("preference-dialog.description")}
       role="dialog"
     >
       <DialogTitle id="preference-dialog-title">
-        Tailor Your Experience
+        {t("preference-dialog.title")}{" "}
       </DialogTitle>
 
       <DialogContent>
         <DialogContentText id="preference-dialog-description">
-          Select your preference so we can surface the most relevant content for
-          you.
+          {t("preference-dialog.description")}{" "}
         </DialogContentText>
 
         <div className="mt-4">
           <FormControl component="fieldset" fullWidth>
-            <FormLabel id="gender-label">Preference</FormLabel>
+            <FormLabel id="gender-label">
+              {t("preference-dialog.preference")}
+            </FormLabel>
             <RadioGroup
               row
               aria-labelledby="gender-label"
@@ -72,9 +76,13 @@ export const PreferenceDialog = () => {
               <FormControlLabel
                 value="female"
                 control={<Radio />}
-                label="Female"
+                label={t("preference-dialog.female")}
               />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel
+                value="male"
+                control={<Radio />}
+                label={t("preference-dialog.male")}
+              />
             </RadioGroup>
           </FormControl>
         </div>
@@ -82,10 +90,10 @@ export const PreferenceDialog = () => {
 
       <DialogActions>
         <Button onClick={handleSkip} color="inherit">
-          Skip
+          {t("preference-dialog.skip")}
         </Button>
         <Button onClick={handleSave} variant="contained" disabled={!gender}>
-          Confirm
+          {t("preference-dialog.confirm")}
         </Button>
       </DialogActions>
     </Dialog>

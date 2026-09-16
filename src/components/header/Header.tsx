@@ -45,7 +45,7 @@ export default function Header() {
   }, [handleScroll]);
 
   return (
-    <header className="fixed w-full top-0 left-0 right-0 z-10">
+    <header className="fixed w-full top-0 left-0 z-10 mui-fixed">
       <nav
         className={cn(
           "bg-background-default/50 backdrop-blur-md  border-black/10 dark:border-white/10 transition-[padding] duration-300",

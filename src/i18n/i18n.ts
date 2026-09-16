@@ -3,12 +3,13 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import en from "./messages/en.json";
 import ar from "./messages/ar.json";
+import { LOCALES } from "@/data/constant";
 
 export const defaultNS = "translation";
 
 export const resources = {
-  en: { [defaultNS]: en },
-  ar: { [defaultNS]: ar },
+  [LOCALES.en]: { [defaultNS]: en },
+  [LOCALES.ar]: { [defaultNS]: ar },
 } as const;
 
 i18n
@@ -17,7 +18,7 @@ i18n
   .init({
     // debug: true,
     // lng: "en", // if you're using a language detector, do not define the lng option
-    fallbackLng: "en",
+    fallbackLng: LOCALES.en,
     defaultNS,
     resources,
 

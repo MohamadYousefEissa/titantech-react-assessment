@@ -22,11 +22,11 @@ html {
   --color-background-secondary: var(--bg-secondary);
 
   /* Material UI breakpoints */
-  --breakpoint-sm: 37.5rem; /* 600px */
-  --breakpoint-md: 56.25rem; /* 900px */
-  --breakpoint-lg: 75rem; /* 1200px */
-  --breakpoint-xl: 96rem; /* 1536px */
-  --breakpoint-2xl: 120rem; /* 1920px */
+  /* --breakpoint-sm: 37.5rem;  */
+  /* --breakpoint-md: 56.25rem;  */
+  /* --breakpoint-lg: 75rem;  */
+  /* --breakpoint-xl: 96rem;  */
+  /* --breakpoint-2xl: 120rem;  */
 
   /* Material UI theme colors */
   --color-primary: var(--mui-palette-primary-main);
