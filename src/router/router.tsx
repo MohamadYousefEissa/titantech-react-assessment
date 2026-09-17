@@ -4,9 +4,12 @@ import { lazy } from "react";
 import Root from "@/Root";
 
 const HomePage = lazy(() => import("@/features/home/HomePage"));
-const ProductsPage = lazy(() => import("@/features/products/ProductsPage"));
+const ProductsPage = lazy(
+  () => import("@/features/products/pages/ProductsPage"),
+);
 const SingleProductPage = lazy(
-  () => import("@/features/products/SingleProductPage"),
+  () =>
+    import("@/features/products/pages/single-product-page/SingleProductPage"),
 );
 
 export const router = createBrowserRouter([

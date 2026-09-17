@@ -1,6 +1,6 @@
 import { Button, Card, Chip, Container, Rating } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useGetSingleProductQuery } from "./ProductsService";
+import { useGetSingleProductQuery } from "../../ProductsService";
 import { ApiErrorFallback } from "@/components/ErrorFallback";
 import { ProductImagesCarousel } from "./components/ImagesCarousel";
 import CheckIcon from "@mui/icons-material/CheckCircleRounded";
@@ -9,8 +9,11 @@ import { useEffect, useState } from "react";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import ShipIcon from "@mui/icons-material/LocalShipping";
 import ShieldIcon from "@mui/icons-material/SafetyCheck";
+import { useTranslation } from "react-i18next";
+import { SingleProductDetailsTabs } from "./components/DetailsTabs";
 
 export default function SingleProductPage() {
+  const { t } = useTranslation();
   const params = useParams();
 
   const id = params.id as string;
@@ -60,7 +63,7 @@ export default function SingleProductPage() {
                 className="text-xs text-muted font-light"
                 style={{ fontFamily: "monospace, Inter, sans-serif" }}
               >
-                SKU: {product.sku}
+                {t("single-product-page.sku")}: {product.sku}
               </p>
             </div>
 
@@ -70,7 +73,7 @@ export default function SingleProductPage() {
               </p>
 
               <Chip
-                label={`-${product.discountPercentage}% OFF`}
+                label={`-${product.discountPercentage}% ${t("single-product-page.off")}`}
                 size="small"
                 color="success"
                 className="font-bold"
@@ -79,7 +82,7 @@ export default function SingleProductPage() {
 
             <div className="flex items-center mt-2 gap-2">
               <Rating name="read-only" value={product.rating} readOnly />
-              <span className="text-muted">{product.rating}</span>
+              <span className="text-muted font-medium">({product.rating})</span>
             </div>
 
             <Card variant="outlined" className="mt-6 p-6">
@@ -97,21 +100,26 @@ export default function SingleProductPage() {
                   </div>
                   {priceAfterDiscount && (
                     <p className="mt-1 text-success text-sm flex items-center gap-1 font-medium">
-                      <CheckIcon style={{ fontSize: "14px" }} /> Special
-                      promotion applied
+                      <CheckIcon style={{ fontSize: "14px" }} />{" "}
+                      {t("single-product-page.special-promotion")}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <Chip
-                    label={product.availabilityStatus}
+                    label={t(
+                      // @ts-expect-error No type
+                      `single-product-page.${product.availabilityStatus}`,
+                    )}
                     color="success"
                     variant="outlined"
                     size="small"
                   />
                   <p className="text-xs text-muted mt-2">
-                    {product.stock} items left
+                    {t("single-product-page.items-left", {
+                      items: product.stock,
+                    })}
                   </p>
                 </div>
               </div>
@@ -128,9 +136,13 @@ export default function SingleProductPage() {
             <hr className="my-6 text-black/10 dark:text-white/10" />
 
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text font-bold">Quantity:</p>
+              <p className="text font-bold">
+                {t("single-product-page.quantity")}:
+              </p>
               <p className="text-xs text-muted">
-                Min order: {product.minimumOrderQuantity} units
+                {t("single-product-page.min-order", {
+                  units: product.minimumOrderQuantity,
+                })}
               </p>
             </div>
 
@@ -145,17 +157,19 @@ export default function SingleProductPage() {
               />
 
               <div>
-                <p className="text-xs text-muted text-end">Total Price: </p>
+                <p className="text-xs text-muted text-end">
+                  {t("single-product-page.total")}:{" "}
+                </p>
                 <p className="font-bold text-xl">${totalPrice.toFixed(2)}</p>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Button variant="contained" size="large" startIcon={<CartIcon />}>
-                Add To Cart
+                {t("single-product-page.add-to-cart")}
               </Button>
               <Button variant="outlined" size="large">
-                Buy Now{" "}
+                {t("single-product-page.buy-now")}
               </Button>
             </div>
 
@@ -163,14 +177,22 @@ export default function SingleProductPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-muted">
               <p>
-                <ShipIcon fontSize="small" /> Ships in 2 weeks
+                <ShipIcon fontSize="small" />{" "}
+                {t("single-product-page.ships-in", {
+                  number: product.shippingInformation.split(" ")[2],
+                })}
               </p>
               <p>
-                <ShieldIcon fontSize="small" /> 1 year warranty
+                <ShieldIcon fontSize="small" />{" "}
+                {t("single-product-page.warranty", {
+                  number: product.warrantyInformation.charAt(0),
+                })}
               </p>
             </div>
           </div>
         </div>
+
+        <SingleProductDetailsTabs product={product} />
       </Container>
     </section>
   );

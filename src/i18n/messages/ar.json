@@ -50,6 +50,37 @@
     "clear": "مسح"
   },
 
+  "single-product-page": {
+    "sku": "رمز المنتج (SKU)",
+    "off": "خصم",
+    "special-promotion": "تم تطبيق العرض الخاص",
+    "In Stock": "متوفر في المخزون",
+    "items-left": "متبقي {{items}} قطع",
+    "quantity": "الكمية",
+    "min-order": "الحد الأدنى للطلب: {{units}} وحدة",
+    "total": "السعر الإجمالي",
+    "add-to-cart": "أضف إلى السلة",
+    "buy-now": "اشترِ الآن",
+    "ships-in": "يتم الشحن خلال {{number}} أسابيع",
+    "warranty": "ضمان لمدة {{number}} سنوات",
+
+    "tabs": {
+      "technical": "المواصفات الفنية",
+      "reviews": "تقييمات العملاء",
+      "brand": "العلامة التجارية",
+      "weight": "الوزن",
+      "dimensions": "الأبعاد (العرض x الارتفاع x العمق)",
+      "created-date": "تاريخ الإنشاء",
+      "last-update": "آخر تحديث للكتالوج",
+      "kg": "كغ",
+      "cm": "سم",
+      "barcode": {
+        "title": "معيار الباركود",
+        "description": "امسح رمز الاستجابة السريعة (QR) للتحقق من أصل المنتج."
+      }
+    }
+  },
+
   "product-card": {
     "add-to-cart": "إضافة إلى العربة",
     "view-btn": "عرض التفاصيل"

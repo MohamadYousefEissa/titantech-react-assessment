@@ -2,19 +2,24 @@ import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import styles from "./ImagesCarousel.module.css";
 import Autoplay from "embla-carousel-autoplay";
+import { useTranslation } from "react-i18next";
 
 type PropType = {
   slides: string[];
 };
 
 export const ProductImagesCarousel = ({ slides }: PropType) => {
+  const { i18n } = useTranslation();
+
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay(),
-  ]);
+  const [emblaMainRef, emblaMainApi] = useEmblaCarousel(
+    { loop: true, direction: i18n.dir() },
+    [Autoplay({ stopOnInteraction: false })],
+  );
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,
+    direction: i18n.dir(),
   });
 
   const onThumbClick = useCallback(

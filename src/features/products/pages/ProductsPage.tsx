@@ -5,13 +5,13 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useSearchForProductsQuery } from "@/features/products/ProductsService";
 import { Button, Container } from "@mui/material";
 import { Trans, useTranslation } from "react-i18next";
-import { ProductsEmptyFallback } from "./components/EmptyFallback";
-import { ProductsPagination } from "./components/Pagination";
-import { ProductsCategoriesFilter } from "./components/filter/CategoriesFilter";
+import { ProductsEmptyFallback } from "../components/EmptyFallback";
+import { ProductsPagination } from "../components/Pagination";
+import { ProductsCategoriesFilter } from "../components/filter/CategoriesFilter";
 import FilterIcon from "@mui/icons-material/FilterAlt";
-import { SortFilter } from "./components/filter/SortFilter";
+import { SortFilter } from "../components/filter/SortFilter";
 import { useEffect } from "react";
-import { resetFilterAndSearchValue } from "./ProductsSlice";
+import { resetFilterAndSearchValue } from "../ProductsSlice";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const LIMIT = 20;

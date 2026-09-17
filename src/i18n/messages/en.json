@@ -50,6 +50,37 @@
     "clear": "Clear"
   },
 
+  "single-product-page": {
+    "sku": "SKU",
+    "off": "OFF",
+    "special-promotion": "Special promotion applied",
+    "In Stock": "In Stock",
+    "items-left": "{{items}} items left",
+    "quantity": "Quantity",
+    "min-order": "Min order: {{units}} units",
+    "total": "Total Price",
+    "add-to-cart": "Add To Cart",
+    "buy-now": "Buy Now",
+    "ships-in": "Ships in {{number}} weeks",
+    "warranty": "{{number}} year warranty",
+
+    "tabs": {
+      "technical": "Technical Specifications",
+      "reviews": "Customer Reviews",
+      "brand": "Brand",
+      "weight": "Weight",
+      "dimensions": "Dimensions (W x H x D)",
+      "created-date": "Created Date",
+      "last-update": "Last Catalog Update",
+      "kg": "kg",
+      "cm": "cm",
+      "barcode": {
+        "title": "Barcode Standard",
+        "description": "Scan the QR code to verify product provenance."
+      }
+    }
+  },
+
   "product-card": {
     "add-to-cart": "Add to cart",
     "view-btn": "View details"
