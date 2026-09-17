@@ -2,8 +2,8 @@ import { ApiErrorFallback } from "@/components/ErrorFallback";
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
 import { ProductSearchInput } from "@/features/products/components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { useSearchForProductsQuery } from "@/services/products";
-import { Container } from "@mui/material";
+import { useSearchForProductsQuery } from "@/features/products/ProductsService";
+import { Button, Container } from "@mui/material";
 import { Trans, useTranslation } from "react-i18next";
 import { ProductsEmptyFallback } from "./components/EmptyFallback";
 import { ProductsPagination } from "./components/Pagination";
@@ -11,11 +11,8 @@ import { ProductsCategoriesFilter } from "./components/filter/CategoriesFilter";
 import FilterIcon from "@mui/icons-material/FilterAlt";
 import { SortFilter } from "./components/filter/SortFilter";
 import { useEffect } from "react";
-import {
-  updateProductsCategory,
-  updateProductsSearchValue,
-  updateProductsSort,
-} from "./ProductsSlice";
+import { resetFilterAndSearchValue } from "./ProductsSlice";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const LIMIT = 20;
 
@@ -27,7 +24,7 @@ export default function ProductsPage() {
     (state) => state.products,
   );
 
-  const { data, isFetching, isError } = useSearchForProductsQuery({
+  const { data, isFetching, isError, isLoading } = useSearchForProductsQuery({
     search: searchInputValue,
     limit: LIMIT,
     skip: page > 1 ? (page - 1) * LIMIT : undefined,
@@ -39,11 +36,9 @@ export default function ProductsPage() {
   const end = data && Math.min(data.skip + data.limit, data.total);
 
   useEffect(() => {
-    // restore store filters and search values on unmount
+    // reset store values on unmount
     return () => {
-      dispatch(updateProductsSearchValue(""));
-      dispatch(updateProductsCategory(""));
-      dispatch(updateProductsSort("oldest"));
+      dispatch(resetFilterAndSearchValue());
     };
   }, [dispatch]);
 
@@ -97,7 +92,15 @@ export default function ProductsPage() {
             {t("products-page.filters")}:
           </p>
           <ProductsCategoriesFilter />
-          <SortFilter />
+          <SortFilter isLoading={isLoading} />
+          {(searchInputValue.length > 0 || category || sort !== "newest") && (
+            <Button
+              startIcon={<ClearIcon style={{ fontSize: "16px" }} />}
+              onClick={() => dispatch(resetFilterAndSearchValue())}
+            >
+              {t("products-page.clear")}
+            </Button>
+          )}
         </div>
 
         {data && (

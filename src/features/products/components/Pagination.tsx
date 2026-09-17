@@ -17,6 +17,7 @@ export const ProductsPagination = ({ count }: { count: number }) => {
     <Pagination
       showFirstButton
       showLastButton
+      color="primary"
       renderItem={(item) => (
         <PaginationItem
           slotProps={

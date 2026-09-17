@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .light {
-  --muted: var(--color-gray-600);
+  --muted: #595959;
   --bg-secondary: var(--color-gray-50);
 }
 

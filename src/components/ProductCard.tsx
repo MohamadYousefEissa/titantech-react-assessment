@@ -22,6 +22,7 @@ export const ProductCard = ({
             src={product.thumbnail}
             alt={`${product.title} image`}
             width={200}
+            height={200}
             className="group-hover:scale-105 transition-transform duration-200"
           />
         </div>
@@ -32,7 +33,7 @@ export const ProductCard = ({
 
         <div className="flex items-center mt-2 gap-2">
           <Rating name="read-only" value={product.rating} readOnly />
-          <span className="text-xs text-text-disabled mt-0.5">
+          <span className="text-xs text-muted mt-0.5">
             ({product.reviews.length})
           </span>
         </div>
@@ -43,6 +44,7 @@ export const ProductCard = ({
           </Button>
 
           <Button
+            aria-label="show product details"
             component={Link}
             to={`/products/${product.id}`}
             variant="text"

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { ProductsApiResponse } from "@/@types/product";
+import type { Product, ProductsApiResponse } from "@/@types/product";
 import type { ProductSort } from "@/features/products/ProductsSlice";
 
 export const productsApi = createApi({
@@ -58,11 +58,15 @@ export const productsApi = createApi({
 
         return `${path}?${params.toString()}`;
       },
-      keepUnusedDataFor: 0, // Disable cache
+      // keepUnusedDataFor: 15, // Cache for 15 seconds the default is 60.
     }),
 
     getCategories: builder.query<string[], void>({
       query: () => "category-list",
+    }),
+
+    getSingleProduct: builder.query<Product, { id: string }>({
+      query: ({ id }) => id,
     }),
   }),
 });
@@ -71,4 +75,5 @@ export const {
   useGetProductsByCategoryQuery,
   useSearchForProductsQuery,
   useGetCategoriesQuery,
+  useGetSingleProductQuery,
 } = productsApi;

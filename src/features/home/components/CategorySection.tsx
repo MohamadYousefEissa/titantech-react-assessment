@@ -1,7 +1,7 @@
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
 import { Skeleton } from "@mui/material";
 import { ApiErrorFallback } from "@/components/ErrorFallback";
-import { useGetProductsByCategoryQuery } from "@/services/products";
+import { useGetProductsByCategoryQuery } from "@/features/products/ProductsService";
 import { useTranslation } from "react-i18next";
 import { ProductsEmptyFallback } from "@/features/products/components/EmptyFallback";
 

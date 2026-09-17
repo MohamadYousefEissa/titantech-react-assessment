@@ -1,23 +1,28 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { updateProductsSort } from "../../ProductsSlice";
 
-const SORTS = ["oldest", "newest", "asc", "desc"] as const;
+const SORTS = ["newest", "oldest", "asc", "desc"] as const;
 
-export const SortFilter = () => {
+export const SortFilter = ({ isLoading }: { isLoading: boolean }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const sort = useAppSelector((state) => state.products.sort);
 
+  if (isLoading)
+    return (
+      <Skeleton variant="rounded" className="w-34" sx={{ height: "40px" }} />
+    );
+
   return (
     <Select
-      id="sort-filter"
+      aria-label="filter by sort"
       value={sort}
       size="small"
       onChange={(ev) => dispatch(updateProductsSort(ev.target.value))}
-      className={`flex-1 max-w-34 min-w-34  ${sort !== "oldest" ? "border border-primary" : ""}`}
+      className={`flex-1 max-w-34 min-w-34  ${sort !== "newest" ? "border border-primary" : ""}`}
     >
       {SORTS.map((s) => (
         <MenuItem key={s} value={s}>

@@ -43,7 +43,7 @@ const theme = createTheme({
   cssVariables: { colorSchemeSelector: "class" },
 
   typography: {
-    fontFamily: ["Roboto", "NotoKufi", "sans-serif"].join(","),
+    fontFamily: ["Inter", "NotoKufi", "sans-serif"].join(","),
     button: {
       textTransform: "none", // Remove all-caps text on buttons
       fontWeight: 400,

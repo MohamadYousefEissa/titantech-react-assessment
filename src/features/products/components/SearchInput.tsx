@@ -54,6 +54,7 @@ export const ProductSearchInput = () => {
   return (
     <TextField
       id="search-products-input"
+      aria-label="search for products"
       placeholder={t("products-page.search-input.placeholder")}
       variant="outlined"
       className="w-full"

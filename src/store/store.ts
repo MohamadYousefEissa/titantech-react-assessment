@@ -1,5 +1,5 @@
 import { productsSlice } from "@/features/products/ProductsSlice";
-import { productsApi } from "@/services/products";
+import { productsApi } from "@/features/products/ProductsService";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({

@@ -46,7 +46,8 @@
       "newest": "Newest",
       "asc": "Name (A-Z)",
       "desc": "Name (Z-A)"
-    }
+    },
+    "clear": "Clear"
   },
 
   "product-card": {

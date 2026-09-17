@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { useGetCategoriesQuery } from "@/services/products";
+import { useGetCategoriesQuery } from "@/features/products/ProductsService";
 import { Autocomplete, Skeleton, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import {
@@ -21,11 +21,15 @@ export const ProductsCategoriesFilter = () => {
     dispatch(updateProductsSearchValue(""));
   };
 
-  if (isLoading) return <Skeleton width={200} style={{ fontSize: "45px" }} />;
+  if (isLoading)
+    return (
+      <Skeleton variant="rounded" className="w-44" sx={{ height: "40px" }} />
+    );
 
   if (data)
     return (
       <Autocomplete
+        aria-label="filter by category"
         disableClearable
         disablePortal
         options={["all", ...data]}
@@ -37,9 +41,13 @@ export const ProductsCategoriesFilter = () => {
         onChange={(_, newValue) => {
           handleChange(newValue);
         }}
-        className={`flex-1 max-w-40 min-w-40 ${category ? "border border-primary rounded-xl" : ""}`}
+        className={`flex-1 max-w-44 min-w-44 ${category ? "border border-primary rounded-xl" : ""}`}
         renderInput={(params) => (
-          <TextField {...params} aria-label="categories" />
+          <TextField
+            {...params}
+            name="search-for-category"
+            aria-label="search for category"
+          />
         )}
       />
     );

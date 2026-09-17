@@ -14,7 +14,7 @@ const initialState: CounterState = {
   searchInputValue: "",
   page: 1,
   category: "",
-  sort: "oldest",
+  sort: "newest",
 };
 
 export const productsSlice = createSlice({
@@ -33,6 +33,12 @@ export const productsSlice = createSlice({
     updateProductsSort: (state, action: PayloadAction<ProductSort>) => {
       state.sort = action.payload;
     },
+    resetFilterAndSearchValue: (state) => {
+      state.page = 1;
+      state.searchInputValue = "";
+      state.category = "";
+      state.sort = "newest";
+    },
   },
 });
 
@@ -41,6 +47,7 @@ export const {
   updateProductsPage,
   updateProductsCategory,
   updateProductsSort,
+  resetFilterAndSearchValue,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
