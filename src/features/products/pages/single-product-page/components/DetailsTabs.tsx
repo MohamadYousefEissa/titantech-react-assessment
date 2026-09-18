@@ -8,6 +8,26 @@ export const SingleProductDetailsTabs = ({ product }: { product: Product }) => {
 
   const [tabValue, setTabValue] = useState(0);
 
+  const specifications = [
+    {
+      label: t("single-product-page.tabs.brand"),
+      value: product.brand,
+    },
+    {
+      label: t("single-product-page.sku"),
+      value: product.sku,
+      valueClassName: "font-mono",
+    },
+    {
+      label: t("single-product-page.tabs.weight"),
+      value: `${product.weight} ${t("single-product-page.tabs.kg")}`,
+    },
+    {
+      label: t("single-product-page.tabs.dimensions"),
+      value: `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} ${t("single-product-page.tabs.cm")}`,
+    },
+  ];
+
   return (
     <section className="mt-10">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -38,44 +58,21 @@ export const SingleProductDetailsTabs = ({ product }: { product: Product }) => {
 
       <CustomTabPanel value={tabValue} index={0}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 space-y-3">
-            <div className="flex justify-between items-center text-sm py-1 border-b border-black/10 dark:border-white/10">
-              <span className=" font-medium">
-                {t("single-product-page.tabs.brand")}
-              </span>
-              <span className="font-semibold">{product.brand}</span>
-            </div>
-
-            <div className="flex justify-between items-center text-sm py-1 border-b border-black/10 dark:border-white/10">
-              <span className=" font-medium">
-                {t("single-product-page.sku")}
-              </span>
-              <span className="font-mono text-xs font-semibold  py-0.5 rounded">
-                {product.sku}
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center text-sm py-1 border-b border-black/10 dark:border-white/10">
-              <span className=" font-medium">
-                {t("single-product-page.tabs.weight")}
-              </span>
-              <span className="font-medium">
-                {product.weight} {t("single-product-page.tabs.kg")}
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center text-sm py-1">
-              <span className=" font-medium">
-                {t("single-product-page.tabs.dimensions")}
-              </span>
-              <span className="font-medium">
-                {product.dimensions.width} x {product.dimensions.height} x{" "}
-                {product.dimensions.depth} {t("single-product-page.tabs.cm")}
-              </span>
-            </div>
+          <div className="p-4 rounded-xl border border-border-muted space-y-3">
+            {specifications.map((spec) => (
+              <div
+                key={spec.label}
+                className="flex justify-between items-center text-sm py-1 border-b last:border-0 border-border-muted"
+              >
+                <span className="font-medium">{spec.label}</span>
+                <span className={`font-semibold ${spec.valueClassName || ""}`}>
+                  {spec.value}
+                </span>
+              </div>
+            ))}
           </div>
 
-          <div className=" p-5 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-between gap-4">
+          <div className="p-5 rounded-xl border border-border-muted flex items-center justify-between gap-4">
             <div className="space-y-2">
               <p className="text-xs font-medium  uppercase tracking-wide">
                 {t("single-product-page.tabs.barcode.title")}
@@ -87,7 +84,7 @@ export const SingleProductDetailsTabs = ({ product }: { product: Product }) => {
                 {t("single-product-page.tabs.barcode.description")}
               </p>
             </div>
-            <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm shrink-0">
+            <div className="p-2 bg-white rounded-lg border border-black/10 dark:border-0 shadow-sm shrink-0">
               <img
                 src={product.meta.qrCode}
                 alt="Product QR Code"
@@ -96,7 +93,7 @@ export const SingleProductDetailsTabs = ({ product }: { product: Product }) => {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 text-xs  space-y-1">
+          <div className="p-4 rounded-xl border border-border-muted text-xs  space-y-1">
             <div className="flex justify-between">
               <span>{t("single-product-page.tabs.created-date")}:</span>
               <span className="font-medium">
@@ -119,7 +116,7 @@ export const SingleProductDetailsTabs = ({ product }: { product: Product }) => {
           {product.reviews.map((review, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-xl border border-black/10 dark:border-white/10 space-y-3"
+              className="p-5 rounded-xl border border-border-muted space-y-3"
             >
               <div className="flex flex-wrap gap-2 items-center justify-between">
                 <div className="flex items-center space-x-3">

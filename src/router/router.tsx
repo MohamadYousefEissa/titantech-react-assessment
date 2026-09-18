@@ -2,6 +2,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import Root from "@/Root";
+import NotFoundPage from "@/not-found";
 
 const HomePage = lazy(() => import("@/features/home/HomePage"));
 const ProductsPage = lazy(
@@ -11,6 +12,7 @@ const SingleProductPage = lazy(
   () =>
     import("@/features/products/pages/single-product-page/SingleProductPage"),
 );
+const LoginPage = lazy(() => import("@/features/auth/LoginPage"));
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,11 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "/products", element: <ProductsPage /> },
       { path: "/products/:id", element: <SingleProductPage /> },
+      { path: "/login", element: <LoginPage /> },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
   },
 ]);

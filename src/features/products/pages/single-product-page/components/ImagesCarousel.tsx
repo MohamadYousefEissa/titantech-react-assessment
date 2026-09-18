@@ -4,21 +4,18 @@ import styles from "./ImagesCarousel.module.css";
 import Autoplay from "embla-carousel-autoplay";
 import { useTranslation } from "react-i18next";
 
-type PropType = {
-  slides: string[];
-};
-
-export const ProductImagesCarousel = ({ slides }: PropType) => {
+export const ProductImagesCarousel = ({ slides }: { slides: string[] }) => {
   const { i18n } = useTranslation();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(
-    { loop: true, direction: i18n.dir() },
-    [Autoplay({ stopOnInteraction: false })],
+    { loop: true, direction: i18n.dir(), active: slides.length > 1 },
+    [Autoplay({ stopOnInteraction: false, playOnInit: true })],
   );
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,
+    active: slides.length > 1,
     direction: i18n.dir(),
   });
 
@@ -43,8 +40,8 @@ export const ProductImagesCarousel = ({ slides }: PropType) => {
     });
 
     emblaMainApi.on("select", onSelect).on("reInit", onSelect);
-    emblaMainApi.plugins().autoplay?.play();
-  }, [emblaMainApi, onSelect]);
+    // if (slides.length > 1) emblaMainApi.plugins().autoplay?.play();
+  }, [emblaMainApi, onSelect, slides]);
 
   return (
     <div className={styles.embla}>
@@ -62,29 +59,34 @@ export const ProductImagesCarousel = ({ slides }: PropType) => {
         </div>
       </div>
 
-      <div className={styles["embla-thumbs"]}>
-        <div className={styles["embla-thumbs__viewport"]} ref={emblaThumbsRef}>
-          <div className={styles["embla-thumbs__container"]}>
-            {slides.map((img, index) => {
-              const isSelected = index === selectedIndex;
+      {slides.length > 1 && (
+        <div className={styles["embla-thumbs"]}>
+          <div
+            className={styles["embla-thumbs__viewport"]}
+            ref={emblaThumbsRef}
+          >
+            <div className={styles["embla-thumbs__container"]}>
+              {slides.map((img, index) => {
+                const isSelected = index === selectedIndex;
 
-              return (
-                <div
-                  key={index}
-                  className={`border rounded-2xl transition-colors duration-200 ${isSelected ? "border-primary" : " border-black/10 dark:border-white/10"}`}
-                >
-                  <img
-                    src={img}
-                    alt="product image"
-                    onClick={() => onThumbClick(index)}
-                    className="size-20 min-w-20"
-                  />
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={index}
+                    className={`border rounded-2xl transition-colors duration-200 ${isSelected ? "border-primary" : " border-border-muted"}`}
+                  >
+                    <img
+                      src={img}
+                      alt="product image"
+                      onClick={() => onThumbClick(index)}
+                      className="size-20 min-w-20"
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

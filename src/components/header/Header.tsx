@@ -1,17 +1,16 @@
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Button, Container, useColorScheme } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 import { useTranslation } from "react-i18next";
-import LoginIcon from "@mui/icons-material/Login";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/merge-classes";
+import { LogButton } from "./LogButton";
 
 const SCROLL_THRESHOLD = 80;
 
 export default function Header() {
   const { t } = useTranslation();
-  const { colorScheme } = useColorScheme();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const rafId = useRef<number>(null);
@@ -48,8 +47,8 @@ export default function Header() {
     <header className="fixed w-full top-0 left-0 z-10 mui-fixed">
       <nav
         className={cn(
-          "bg-background-default/50 backdrop-blur-md  border-black/10 dark:border-white/10 transition-[padding] duration-300",
-          isScrolled ? "border-b py-3" : "py-6",
+          "bg-background-default/50 backdrop-blur-md border-b transition-[padding] duration-300",
+          isScrolled ? "border-border-muted py-3" : "border-transparent py-6",
         )}
       >
         <Container>
@@ -79,14 +78,7 @@ export default function Header() {
               <LanguageSelector />
 
               <span className="ltr:ml-4 rtl:mr-4">
-                <Button
-                  component={Link}
-                  to="/login"
-                  variant={colorScheme === "light" ? "contained" : "outlined"}
-                  endIcon={<LoginIcon className="rtl:rotate-180" />}
-                >
-                  {t("header.login")}
-                </Button>
+                <LogButton />
               </span>
             </div>
           </div>

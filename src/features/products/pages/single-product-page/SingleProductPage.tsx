@@ -11,6 +11,7 @@ import ShipIcon from "@mui/icons-material/LocalShipping";
 import ShieldIcon from "@mui/icons-material/SafetyCheck";
 import { useTranslation } from "react-i18next";
 import { SingleProductDetailsTabs } from "./components/DetailsTabs";
+import { useAppSelector } from "@/hooks/redux";
 
 export default function SingleProductPage() {
   const { t } = useTranslation();
@@ -18,12 +19,13 @@ export default function SingleProductPage() {
 
   const id = params.id as string;
 
+  const user = useAppSelector((state) => state.auth.user);
+
   const {
     data: product,
     isLoading,
     isError,
   } = useGetSingleProductQuery({ id });
-  console.log(product);
 
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -51,7 +53,7 @@ export default function SingleProductPage() {
   return (
     <section className="pt-40 pb-20">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <ProductImagesCarousel slides={product.images} />
 
           <div className="lg:col-span-2">
@@ -59,10 +61,7 @@ export default function SingleProductPage() {
               <p className="text-xs tracking-widest font-medium uppercase text-primary">
                 {product.brand}
               </p>
-              <p
-                className="text-xs text-muted font-light"
-                style={{ fontFamily: "monospace, Inter, sans-serif" }}
-              >
+              <p className="text-xs text-muted font-light font-mono">
                 {t("single-product-page.sku")}: {product.sku}
               </p>
             </div>
@@ -72,12 +71,15 @@ export default function SingleProductPage() {
                 {product.title}
               </p>
 
-              <Chip
-                label={`-${product.discountPercentage}% ${t("single-product-page.off")}`}
-                size="small"
-                color="success"
-                className="font-bold"
-              />
+              {product.discountPercentage && (
+                <Chip
+                  label={`-${product.discountPercentage}% ${t("single-product-page.off")}`}
+                  size="small"
+                  variant="outlined"
+                  color="warning"
+                  className="font-bold"
+                />
+              )}
             </div>
 
             <div className="flex items-center mt-2 gap-2">
@@ -109,10 +111,13 @@ export default function SingleProductPage() {
                 <div>
                   <Chip
                     label={t(
-                      // @ts-expect-error No type
                       `single-product-page.${product.availabilityStatus}`,
                     )}
-                    color="success"
+                    color={
+                      product.availabilityStatus === "In Stock"
+                        ? "success"
+                        : "error"
+                    }
                     variant="outlined"
                     size="small"
                   />
@@ -129,51 +134,60 @@ export default function SingleProductPage() {
 
             <div className="flex flex-wrap gap-2 mt-4">
               {product.tags.map((t) => (
-                <Chip label={`#${t}`} size="small" />
+                <Chip key={t} label={`#${t}`} size="small" />
               ))}
             </div>
 
             <hr className="my-6 text-black/10 dark:text-white/10" />
 
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text font-bold">
-                {t("single-product-page.quantity")}:
-              </p>
-              <p className="text-xs text-muted">
-                {t("single-product-page.min-order", {
-                  units: product.minimumOrderQuantity,
-                })}
-              </p>
-            </div>
+            {product.availabilityStatus !== "Out of Stock" && user && (
+              <section>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text font-bold">
+                    {t("single-product-page.quantity")}:
+                  </p>
+                  <p className="text-xs text-muted">
+                    {t("single-product-page.min-order", {
+                      units: product.minimumOrderQuantity,
+                    })}
+                  </p>
+                </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-              <NumberSpinner
-                aria-label="quantity"
-                size="small"
-                min={product.minimumOrderQuantity}
-                max={product.stock}
-                value={quantity}
-                onValueChange={(val) => val && setQuantity(val)}
-              />
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+                  <NumberSpinner
+                    aria-label="quantity"
+                    size="small"
+                    min={product.minimumOrderQuantity}
+                    max={product.stock}
+                    value={quantity}
+                    onValueChange={(val) => val && setQuantity(val)}
+                  />
 
-              <div>
-                <p className="text-xs text-muted text-end">
-                  {t("single-product-page.total")}:{" "}
-                </p>
-                <p className="font-bold text-xl">${totalPrice.toFixed(2)}</p>
-              </div>
-            </div>
+                  <div>
+                    <p className="text-xs text-muted text-end">
+                      {t("single-product-page.total")}:{" "}
+                    </p>
+                    <p className="font-bold text-xl">
+                      ${totalPrice.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
 
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Button variant="contained" size="large" startIcon={<CartIcon />}>
-                {t("single-product-page.add-to-cart")}
-              </Button>
-              <Button variant="outlined" size="large">
-                {t("single-product-page.buy-now")}
-              </Button>
-            </div>
-
-            <hr className="my-6 text-black/10 dark:text-white/10" />
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<CartIcon />}
+                  >
+                    {t("single-product-page.add-to-cart")}
+                  </Button>
+                  <Button variant="outlined" size="large">
+                    {t("single-product-page.buy-now")}
+                  </Button>
+                </div>
+                <hr className="my-6 text-black/10 dark:text-white/10" />
+              </section>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-muted">
               <p>
@@ -190,7 +204,7 @@ export default function SingleProductPage() {
               </p>
             </div>
           </div>
-        </div>
+        </section>
 
         <SingleProductDetailsTabs product={product} />
       </Container>

@@ -4,13 +4,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .light {
-  --muted: #595959;
-  --bg-secondary: var(--color-gray-50);
+  --color-muted: #595959;
+  --color-background-secondary: var(--color-gray-50);
+  --color-border-muted: rgba(0, 0, 0, 0.1);
 }
 
 .dark {
-  --muted: var(--color-text-disabled);
-  --bg-secondary: rgba(0, 0, 0, 0.2);
+  --color-muted: var(--color-text-disabled);
+  --color-background-secondary: rgba(0, 0, 0, 0.2);
+  --color-border-muted: rgba(255, 255, 255, 0.1);
 }
 
 html {
@@ -18,8 +20,9 @@ html {
 }
 
 @theme inline {
-  --color-muted: var(--muted);
-  --color-background-secondary: var(--bg-secondary);
+  --color-muted: var(--color-muted);
+  --color-background-secondary: var(--color-background-secondary);
+  --color-border-muted: var(--color-border-muted);
 
   /* Material UI breakpoints */
   /* --breakpoint-sm: 37.5rem;  */

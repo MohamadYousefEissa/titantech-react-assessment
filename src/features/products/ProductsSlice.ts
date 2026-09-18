@@ -3,14 +3,14 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type ProductSort = "oldest" | "newest" | "asc" | "desc";
 
-interface CounterState {
+interface ProductsState {
   searchInputValue: string;
   page: number;
   category: string;
   sort: ProductSort;
 }
 
-const initialState: CounterState = {
+const initialState: ProductsState = {
   searchInputValue: "",
   page: 1,
   category: "",

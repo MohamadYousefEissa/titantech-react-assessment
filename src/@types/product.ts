@@ -1,14 +1,24 @@
-export interface Dimensions {
+type ProductAvailability = "Low Stock" | "In Stock" | "Out of Stock";
+
+interface Dimensions {
   width: number;
   height: number;
   depth: number;
 }
 
-export interface Meta {
+interface Meta {
   createdAt: string;
   updatedAt: string;
   barcode: string;
   qrCode: string;
+}
+
+interface Review {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
 }
 
 export interface ProductsApiResponse {
@@ -16,14 +26,6 @@ export interface ProductsApiResponse {
   total: number;
   skip: number;
   limit: number;
-}
-
-export interface Review {
-  rating: number;
-  comment: string;
-  date: string;
-  reviewerName: string;
-  reviewerEmail: string;
 }
 
 export interface Product {
@@ -42,7 +44,7 @@ export interface Product {
   dimensions: Dimensions;
   warrantyInformation: string;
   shippingInformation: string;
-  availabilityStatus: string;
+  availabilityStatus: ProductAvailability;
   reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;

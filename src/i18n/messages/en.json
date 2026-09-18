@@ -13,13 +13,22 @@
     "main": {
       "title": "Failed to load data",
       "description": "An unexpected error occurred while communicating with the server."
-    }
+    },
+    "invalid-credentials": "Invalid credentials"
+  },
+
+  "not-found": {
+    "title": "Oops! The page you are looking for has vanished.",
+    "description": "The link might be broken, or the page may have been removed or renamed. Let's get you back on track.",
+    "back-home": "Go Back Home",
+    "prev-page": "Previous Page"
   },
 
   "header": {
     "links": { "home": "Home", "products": "Products" },
     "themes": { "system": "System", "dark": "Dark", "light": "Light" },
     "login": "Login",
+    "logout": "Logout",
     "theme": "Theme",
     "language": "Language"
   },
@@ -55,6 +64,8 @@
     "off": "OFF",
     "special-promotion": "Special promotion applied",
     "In Stock": "In Stock",
+    "Out of Stock": "Out of Stock",
+    "Low Stock": "Low Stock",
     "items-left": "{{items}} items left",
     "quantity": "Quantity",
     "min-order": "Min order: {{units}} units",
@@ -86,6 +97,30 @@
     "view-btn": "View details"
   },
 
+  "login-page": {
+    "title": "Welcome Back",
+    "description": "Please enter your credentials to log in",
+    "form": {
+      "forgot-password": "Forgot password?",
+      "signin": "SignIn",
+      "didnot-have-account": "Don't have an account?",
+      "signup": "SignUp",
+      "username": {
+        "label": "Username",
+        "validators": { "required": "Username is required" }
+      },
+      "password": {
+        "label": "Password",
+        "validators": {
+          "required": "Password is required",
+          "length": "Password must be at least {{min}} characters"
+        }
+      }
+    },
+
+    "logged-success": "Logged In successfully"
+  },
+
   "preference-dialog": {
     "title": "Tailor Your Experience",
     "description": "Select your preference so we can surface the most relevant content for you.",
@@ -94,6 +129,13 @@
     "female": "Female",
     "confirm": "Confirm",
     "skip": "Skip"
+  },
+
+  "logout-dialog": {
+    "title": "Confirm Logout",
+    "description": "Are you sure you want to log out? You will need to sign back in to access your account.",
+    "logout": "Log Out",
+    "cancel": "Cancel"
   },
 
   "categories": {
