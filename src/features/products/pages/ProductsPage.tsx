@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useSearchForProductsQuery } from "@/features/products/ProductsService";
 import { Button, Container } from "@mui/material";
 import { Trans, useTranslation } from "react-i18next";
-import { ProductsEmptyFallback } from "../components/EmptyFallback";
+import { EmptyFallback } from "../../../components/EmptyFallback";
 import { ProductsPagination } from "../components/Pagination";
 import { ProductsCategoriesFilter } from "../components/filter/CategoriesFilter";
 import FilterIcon from "@mui/icons-material/FilterAlt";
@@ -24,13 +24,14 @@ export default function ProductsPage() {
     (state) => state.products,
   );
 
-  const { data, isFetching, isError, isLoading } = useSearchForProductsQuery({
-    search: searchInputValue,
-    limit: LIMIT,
-    skip: page > 1 ? (page - 1) * LIMIT : undefined,
-    category,
-    sort,
-  });
+  const { data, isFetching, isError, isLoading, refetch } =
+    useSearchForProductsQuery({
+      search: searchInputValue,
+      limit: LIMIT,
+      skip: page > 1 ? (page - 1) * LIMIT : undefined,
+      category,
+      sort,
+    });
 
   const start = data && (data.total === 0 ? 0 : data.skip + 1);
   const end = data && Math.min(data.skip + data.limit, data.total);
@@ -54,10 +55,20 @@ export default function ProductsPage() {
         </div>
       );
 
-    if (isError) return <ApiErrorFallback />;
+    if (isError)
+      return (
+        <div className="mt-10">
+          <ApiErrorFallback refetch={refetch} />
+        </div>
+      );
 
-    if (data?.products.length === 0) return <ProductsEmptyFallback />;
-
+    if (data?.products.length === 0)
+      return (
+        <EmptyFallback
+          title={t("empty.products.title")}
+          description={t("empty.products.description")}
+        />
+      );
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {data?.products.map((p) => (
@@ -68,9 +79,9 @@ export default function ProductsPage() {
   };
 
   return (
-    <section className="pt-40 pb-20">
+    <section className="pt-30 sm:pt-40 pb-10 sm:pb-20">
       <Container>
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-3xl sm:text-4xl font-bold">
           <Trans
             i18n={i18n}
             i18nKey="products-page.title"
@@ -79,7 +90,7 @@ export default function ProductsPage() {
             }}
           />
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-muted">
+        <p className="mt-4 max-w-2xl sm:text-lg text-muted">
           {t("products-page.description")}
         </p>
         <div className="mt-8">

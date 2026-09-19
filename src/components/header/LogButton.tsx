@@ -5,6 +5,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
@@ -32,14 +34,11 @@ export const LogButton = () => {
   if (user)
     return (
       <>
-        <Button
-          onClick={handleOpen}
-          variant="text"
-          color="error"
-          endIcon={<LogoutIcon className="rtl:rotate-180" />}
-        >
-          {t("header.logout")}
-        </Button>
+        <Tooltip title={t("header.logout")}>
+          <IconButton onClick={handleOpen} color="error">
+            <LogoutIcon fontSize="small" className="rtl:rotate-180" />
+          </IconButton>
+        </Tooltip>
         <Dialog
           open={open}
           onClose={handleClose}

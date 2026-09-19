@@ -80,5 +80,10 @@ const theme = createTheme({
         classes: { paper: "dark:bg-black!" },
       },
     },
+    MuiTableCell: {
+      styleOverrides: {
+        root: { borderRadius: 0, borderColor: "var(--color-divider)" },
+      },
+    },
   },
 });

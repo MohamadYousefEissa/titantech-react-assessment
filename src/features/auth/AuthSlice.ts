@@ -1,5 +1,5 @@
 import type { LoginResponse } from "@/@types/auth";
-import type { User } from "@/@types/user";
+import type { User, UserDetails } from "@/@types/user";
 import { DEFAULT_ERROR_MESSAGE, TOKEN_KEYS } from "@/data/constant";
 import { api } from "@/utils/axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -12,7 +12,7 @@ export const loginUser = createAsyncThunk(
     { rejectWithValue },
   ) => {
     try {
-      const { data } = await api.post<LoginResponse>("/auth/login", {
+      const { data } = await api.post<LoginResponse>("/user/login", {
         username,
         password,
       });
@@ -41,7 +41,7 @@ export const checkUserAuth = createAsyncThunk(
     }
 
     try {
-      const { data } = await api.get<User>("/user/me");
+      const { data } = await api.get<UserDetails>("/user/me");
 
       return data;
     } catch (error) {
@@ -75,9 +75,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { accessToken, refreshToken, ...user } = action.payload;
-      state.user = user;
+      state.user = action.payload;
     });
 
     builder.addCase(checkUserAuth.fulfilled, (state, action) => {

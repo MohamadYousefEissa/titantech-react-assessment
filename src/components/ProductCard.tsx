@@ -26,6 +26,7 @@ export const ProductCard = ({
       <Link to={`/products/${product.id}`} className="group">
         <div className="flex justify-center border-b border-border-muted overflow-clip relative">
           <img
+            loading="lazy"
             src={product.thumbnail}
             alt={`${product.title} image`}
             width={200}

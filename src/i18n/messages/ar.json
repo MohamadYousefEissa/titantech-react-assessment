@@ -4,6 +4,10 @@
       "title": "لا توجد منتجات",
       "description": "لم نتمكن من العثور على أي منتجات تطابق اختيارك. يرجى محاولة تعديل الفلاتر أو البحث عن شيء آخر."
     },
+    "users": {
+      "title": "لا يوجد مستخدمين",
+      "description": "لم نتمكن من العثور على أي مستخدم يطابق اختيارك. يرجى البحث عن شيء آخر."
+    },
     "categories": {
       "title": "لا توجد فئات"
     }
@@ -12,7 +16,8 @@
   "errors": {
     "main": {
       "title": "فشل في تحميل البيانات",
-      "description": "حدث خطأ غير متوقع أثناء الاتصال بالخادم. يرجى المحاولة مرة أخرى أو تحديث الصفحة."
+      "description": "حدث خطأ غير متوقع أثناء الاتصال بالخادم. يرجى المحاولة مرة أخرى أو تحديث الصفحة.",
+      "retry": "إعادة المحاولة"
     },
     "invalid-credentials": "بيانات الاعتماد غير صالحة"
   },
@@ -24,8 +29,18 @@
     "prev-page": "الصفحة السابقة"
   },
 
+  "roles": {
+    "admin": "مدير النظام",
+    "moderator": "مشرف",
+    "user": "مستخدم"
+  },
+
   "header": {
-    "links": { "home": "الرئيسية", "products": "المنتجات" },
+    "links": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "users": "المستخدمين"
+    },
     "themes": { "system": "النظام", "dark": "داكن", "light": "فاتح" },
     "login": "تسجيل دخول",
     "logout": "تسجيل خروج",
@@ -95,6 +110,83 @@
   "product-card": {
     "add-to-cart": "إضافة إلى العربة",
     "view-btn": "عرض التفاصيل"
+  },
+
+  "users-page": {
+    "search-input": { "placeholder": "إبحث عن مستخدم..." },
+    "table": {
+      "user": "المستخدم",
+      "role": "الدور",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "age": "العمر",
+      "company": "الشركة",
+      "address": "العنوان",
+      "no-users": "لم يتم العثور على مستخدمين",
+      "rows-per-page": "عدد الصفوف في الصفحة"
+    }
+  },
+
+  "single-user-page": {
+    "sections": {
+      "personalInformation": "المعلومات الشخصية",
+      "physicalAttributes": "السمات الجسدية",
+      "companyAndRole": "الشركة والدور الوظيفي",
+      "homeAddress": "عنوان السكن",
+      "financialInfo": "المعلومات المالية",
+      "cryptoAssets": "الأصول المشفرة",
+      "identityAndSecurity": "الهوية والأمان",
+      "technicalSpecs": "المواصفات التقنية"
+    },
+    "labels": {
+      "fullName": "الاسم الكامل",
+      "maidenName": "اسم العائلة قبل الزواج",
+      "gender": "الجنس",
+      "age": "العمر",
+      "birthDate": "تاريخ الميلاد",
+      "university": "الجامعة",
+      "height": "الطول",
+      "weight": "الوزن",
+      "bloodGroup": "فصيلة الدم",
+      "eyeColor": "لون العينين",
+      "hairColor": "لون الشعر",
+      "hairType": "نوع الشعر",
+      "companyName": "اسم الشركة",
+      "department": "القسم",
+      "jobTitle": "المسمى الوظيفي",
+      "companyAddress": "عنوان الشركة",
+      "cityAndState": "المدينة والولاية",
+      "country": "البلد",
+      "streetAddress": "عنوان الشارع",
+      "city": "المدينة",
+      "state": "الولاية",
+      "postalCode": "الرمز البريدي",
+      "coordinates": "الإحداثيات",
+      "cardType": "نوع البطاقة",
+      "cardNumber": "رقم البطاقة",
+      "expires": "تاريخ الانتهاء",
+      "currency": "العملة",
+      "iban": "رقم الآيبان (IBAN)",
+      "coin": "العملة المشفرة",
+      "network": "الشبكة",
+      "walletAddress": "عنوان المحفظة",
+      "ssn": "رقم الضمان الاجتماعي (SSN)",
+      "ein": "رقم تعريف هوية دافع الضرائب (EIN)",
+      "username": "اسم المستخدم",
+      "role": "الدور",
+      "ipAddress": "عنوان IP",
+      "macAddress": "عنوان MAC",
+      "userAgent": "متصفح المستخدم:"
+    },
+    "ui": {
+      "at": "في",
+      "notAvailable": "غير متوفر",
+      "years": "سنوات",
+      "cm": "سم",
+      "kg": "كجم",
+      "copy": "نسخ",
+      "copied": "تم النسخ!"
+    }
   },
 
   "login-page": {

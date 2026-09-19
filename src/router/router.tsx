@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import Root from "@/Root";
 import NotFoundPage from "@/not-found";
+import { AuthMiddleware } from "@/middlewares/Auth";
 
 const HomePage = lazy(() => import("@/features/home/HomePage"));
 const ProductsPage = lazy(
@@ -13,6 +14,10 @@ const SingleProductPage = lazy(
     import("@/features/products/pages/single-product-page/SingleProductPage"),
 );
 const LoginPage = lazy(() => import("@/features/auth/LoginPage"));
+const UsersPage = lazy(() => import("@/features/users/pages/UsersPage"));
+const SingleUserPage = lazy(
+  () => import("@/features/users/pages/SingleUserPage"),
+);
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +28,15 @@ export const router = createBrowserRouter([
       { path: "/products", element: <ProductsPage /> },
       { path: "/products/:id", element: <SingleProductPage /> },
       { path: "/login", element: <LoginPage /> },
+
+      {
+        element: <AuthMiddleware />,
+        children: [
+          { path: "/users", element: <UsersPage /> },
+          { path: "/users/:id", element: <SingleUserPage /> },
+        ],
+      },
+
       {
         path: "*",
         element: <NotFoundPage />,

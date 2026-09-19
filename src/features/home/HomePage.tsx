@@ -5,6 +5,7 @@ import { PreferenceDialog } from "@/components/PreferenceDialog";
 import { useContext } from "react";
 import { PreferenceContext } from "@/contexts/preference-context";
 import { HomeCategorySection } from "./components/CategorySection";
+import { cn } from "@/utils/merge-classes";
 
 const SLUGS = {
   male: ["mens-watches", "mens-shirts", "mens-shoes"],
@@ -25,9 +26,9 @@ export default function HomePage() {
       <HomeHeroSection />
 
       <section id="categories" className="scroll-mt-10">
-        <div className="bg-background-secondary pt-20">
+        <div className="bg-background-secondary pt-10 sm:pt-20">
           <Container>
-            <p className="text-3xl font-bold">
+            <p className="text-2xl sm:text-3xl font-bold">
               {t("home.categories-section.title")}
             </p>
           </Container>
@@ -37,9 +38,10 @@ export default function HomePage() {
           <section
             id={slug}
             key={slug}
-            className={`py-20 ${
-              i % 2 === 0 ? "bg-background-secondary" : "bg-background-paper"
-            }`}
+            className={cn(
+              "py-10 sm:py-20",
+              i % 2 === 0 ? "bg-background-secondary" : "bg-background-paper",
+            )}
           >
             <Container>
               <HomeCategorySection slug={slug} />

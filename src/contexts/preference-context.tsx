@@ -1,6 +1,5 @@
+import type { Gender } from "@/@types/user";
 import { createContext, useEffect, useState, type ReactNode } from "react";
-
-export type Gender = "male" | "female" | "";
 
 interface PreferenceState {
   hasSetPreference: boolean;

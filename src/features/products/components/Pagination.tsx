@@ -20,6 +20,11 @@ export const ProductsPagination = ({ count }: { count: number }) => {
       color="primary"
       renderItem={(item) => (
         <PaginationItem
+          className={
+            item.type === "first" || item.type === "last"
+              ? "max-sm:hidden!"
+              : ""
+          }
           slotProps={
             i18n.dir() === "rtl"
               ? {

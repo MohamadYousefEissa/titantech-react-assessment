@@ -7,7 +7,7 @@ export const HomeHeroSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="h-dvh flex items-center gap-10">
+    <section className="h-dvh flex items-center gap-10 max-sm:mt-10">
       <Container>
         <div>
           <h1 className="text-5xl sm:text-6xl leading-tight font-bold">

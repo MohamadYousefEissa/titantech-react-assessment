@@ -1,43 +1,23 @@
-import { Alert, AlertTitle, Box, Paper, Typography } from "@mui/material";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import { Alert, AlertTitle, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-export const ApiErrorFallback = () => {
+export const ApiErrorFallback = ({ refetch }: { refetch: () => void }) => {
   const { t } = useTranslation();
 
   return (
-    <Box component="div">
-      <Paper
-        elevation={0}
-        variant="outlined"
-        sx={{
-          maxWidth: 480,
-          width: "100%",
-          p: 2,
-          borderColor: "error.light",
-          backgroundColor: "error.50",
-        }}
-      >
-        <Alert
-          severity="error"
-          icon={<ErrorOutlineIcon fontSize="inherit" />}
-          sx={{
-            alignItems: "center",
-            backgroundColor: "transparent",
-            p: 0,
-            "& .MuiAlert-message": {
-              width: "100%",
-            },
-          }}
+    <Alert severity="error" variant="outlined" sx={{ padding: "18px" }}>
+      <AlertTitle sx={{ fontWeight: 600 }}>{t("errors.main.title")}</AlertTitle>
+      <p>{t("errors.main.description")}</p>
+
+      <div className="mt-4">
+        <Button
+          variant="outlined"
+          sx={{ color: "error.light", borderColor: "error.light" }}
+          onClick={refetch}
         >
-          <AlertTitle sx={{ fontWeight: 600 }}>
-            {t("errors.main.title")}
-          </AlertTitle>
-          <Typography variant="body2" color="error.dark">
-            {t("errors.main.description")}
-          </Typography>
-        </Alert>
-      </Paper>
-    </Box>
+          {t("errors.main.retry")}
+        </Button>
+      </div>
+    </Alert>
   );
 };

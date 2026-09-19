@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { loginUser } from "./AuthSlice";
 import { useTranslation } from "react-i18next";
@@ -20,6 +20,7 @@ export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const user = useAppSelector((state) => state.auth.user);
 
@@ -50,7 +51,7 @@ export const LoginPage = () => {
     },
   });
 
-  if (user) return <Navigate to="/" replace />;
+  if (user) return <Navigate to="/" state={{ from: location }} replace />;
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {

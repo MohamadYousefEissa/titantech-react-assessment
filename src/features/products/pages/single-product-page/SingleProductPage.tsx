@@ -1,4 +1,11 @@
-import { Button, Card, Chip, Container, Rating } from "@mui/material";
+import {
+  Button,
+  Card,
+  Chip,
+  CircularProgress,
+  Container,
+  Rating,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../ProductsService";
 import { ApiErrorFallback } from "@/components/ErrorFallback";
@@ -25,6 +32,7 @@ export default function SingleProductPage() {
     data: product,
     isLoading,
     isError,
+    refetch,
   } = useGetSingleProductQuery({ id });
 
   const [quantity, setQuantity] = useState<number>(1);
@@ -36,9 +44,19 @@ export default function SingleProductPage() {
       });
   }, [product]);
 
-  if (isLoading) return;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <CircularProgress />
+      </div>
+    );
 
-  if (isError) return <ApiErrorFallback />;
+  if (isError)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ApiErrorFallback refetch={refetch} />
+      </div>
+    );
 
   if (!product) return;
 
@@ -51,7 +69,7 @@ export default function SingleProductPage() {
     : product.price * quantity;
 
   return (
-    <section className="pt-40 pb-20">
+    <section className="pt-30 sm:pt-40 pb-10 sm:pb-20">
       <Container>
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <ProductImagesCarousel slides={product.images} />
@@ -84,18 +102,20 @@ export default function SingleProductPage() {
 
             <div className="flex items-center mt-2 gap-2">
               <Rating name="read-only" value={product.rating} readOnly />
-              <span className="text-muted font-medium">({product.rating})</span>
+              <span className="text-muted font-medium">
+                ({product.rating.toFixed(1)})
+              </span>
             </div>
 
             <Card variant="outlined" className="mt-6 p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <div className="flex items-end gap-2">
-                    <p className="text-2xl font-bold">
+                    <p className="text-xl sm:text-2xl font-bold">
                       ${priceAfterDiscount?.toFixed(2) || product.price}
                     </p>
                     {priceAfterDiscount && (
-                      <p className="text-lg line-through text-muted">
+                      <p className="sm:text-lg line-through text-muted">
                         ${product.price}
                       </p>
                     )}

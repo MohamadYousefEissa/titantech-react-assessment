@@ -1,4 +1,5 @@
-import { PreferenceContext, type Gender } from "@/contexts/preference-context";
+import type { Gender } from "@/@types/user";
+import { PreferenceContext } from "@/contexts/preference-context";
 import {
   FormControl,
   FormControlLabel,

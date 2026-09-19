@@ -4,6 +4,10 @@
       "title": "No Products Found",
       "description": "We couldn't find any products matching your selection. Try adjusting your filters or searching for something else."
     },
+    "users": {
+      "title": "No Users Found",
+      "description": "We couldn't find any users matching your selection. Try searching for something else."
+    },
     "categories": {
       "title": "No Categories Found"
     }
@@ -12,7 +16,8 @@
   "errors": {
     "main": {
       "title": "Failed to load data",
-      "description": "An unexpected error occurred while communicating with the server."
+      "description": "An unexpected error occurred while communicating with the server.",
+      "retry": "Retry"
     },
     "invalid-credentials": "Invalid credentials"
   },
@@ -24,8 +29,10 @@
     "prev-page": "Previous Page"
   },
 
+  "roles": { "admin": "Admin", "moderator": "Moderator", "user": "User" },
+
   "header": {
-    "links": { "home": "Home", "products": "Products" },
+    "links": { "home": "Home", "products": "Products", "users": "Users" },
     "themes": { "system": "System", "dark": "Dark", "light": "Light" },
     "login": "Login",
     "logout": "Logout",
@@ -95,6 +102,83 @@
   "product-card": {
     "add-to-cart": "Add to cart",
     "view-btn": "View details"
+  },
+
+  "users-page": {
+    "search-input": { "placeholder": "Search for a user..." },
+    "table": {
+      "user": "User",
+      "role": "Role",
+      "email": "Email",
+      "phone": "Phone",
+      "age": "Age",
+      "company": "Company",
+      "address": "Address",
+      "no-users": "No users found",
+      "rows-per-page": "Rows per page"
+    }
+  },
+
+  "single-user-page": {
+    "sections": {
+      "personalInformation": "Personal Information",
+      "physicalAttributes": "Physical Attributes",
+      "companyAndRole": "Company & Role",
+      "homeAddress": "Home Address",
+      "financialInfo": "Financial Info",
+      "cryptoAssets": "Crypto Assets",
+      "identityAndSecurity": "Identity & Security",
+      "technicalSpecs": "Technical Specs"
+    },
+    "labels": {
+      "fullName": "Full Name",
+      "maidenName": "Maiden Name",
+      "gender": "Gender",
+      "age": "Age",
+      "birthDate": "Birth Date",
+      "university": "University",
+      "height": "Height",
+      "weight": "Weight",
+      "bloodGroup": "Blood Group",
+      "eyeColor": "Eye Color",
+      "hairColor": "Hair Color",
+      "hairType": "Hair Type",
+      "companyName": "Company Name",
+      "department": "Department",
+      "jobTitle": "Job Title",
+      "companyAddress": "Company Address",
+      "cityAndState": "City & State",
+      "country": "Country",
+      "streetAddress": "Street Address",
+      "city": "City",
+      "state": "State",
+      "postalCode": "Postal Code",
+      "coordinates": "Coordinates",
+      "cardType": "Card Type",
+      "cardNumber": "Card Number",
+      "expires": "Expires",
+      "currency": "Currency",
+      "iban": "IBAN",
+      "coin": "Coin",
+      "network": "Network",
+      "walletAddress": "Wallet Address",
+      "ssn": "SSN",
+      "ein": "EIN",
+      "username": "Username",
+      "role": "Role",
+      "ipAddress": "IP Address",
+      "macAddress": "MAC Address",
+      "userAgent": "User Agent:"
+    },
+    "ui": {
+      "at": "at",
+      "notAvailable": "N/A",
+      "years": "years",
+      "cm": "cm",
+      "kg": "kg",
+      "copy": "Copy",
+      "copied": "Copied!"
+    }
   },
 
   "login-page": {
