@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Shopware E-Commerce",
+    "withTitle": "{{text}} | Shopware E-Commerce"
+  },
+
   "empty": {
     "products": {
       "title": "No Products Found",
@@ -10,6 +15,10 @@
     },
     "categories": {
       "title": "No Categories Found"
+    },
+    "cart": {
+      "title": "Your cart is empty",
+      "description": "Items you add to your cart will appear here."
     }
   },
 
@@ -100,8 +109,9 @@
   },
 
   "product-card": {
-    "add-to-cart": "Add to cart",
-    "view-btn": "View details"
+    "add-to-cart": "Add {{number}} to cart",
+    "view-btn": "View details",
+    "login-required": "Login Required"
   },
 
   "users-page": {
@@ -115,7 +125,8 @@
       "company": "Company",
       "address": "Address",
       "no-users": "No users found",
-      "rows-per-page": "Rows per page"
+      "rows-per-page": "Rows per page",
+      "all": "All"
     }
   },
 
@@ -203,6 +214,20 @@
     },
 
     "logged-success": "Logged In successfully"
+  },
+
+  "cart-page": {
+    "title": "Shopping Cart",
+    "items": "items",
+    "unit-price": "Unit Price",
+    "order-summary": "Order Summary",
+    "total-products": "Total Products",
+    "total-quantity": "Total Quantity",
+    "subtotal": "Subtotal",
+    "discount-savings": "Discount Savings",
+    "total": "Total",
+    "proceed": "Proceed to Checkout",
+    "added-message": "{{name}} added to cart"
   },
 
   "preference-dialog": {

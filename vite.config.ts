@@ -15,6 +15,8 @@ export default defineConfig({
     tailwindcss(),
   ],
 
+  // server: { host: true },
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

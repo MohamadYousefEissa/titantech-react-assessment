@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Shopware للتجارة الإلكترونية",
+    "withTitle": "{{text}} | Shopware للتجارة الإلكترونية"
+  },
+
   "empty": {
     "products": {
       "title": "لا توجد منتجات",
@@ -10,6 +15,10 @@
     },
     "categories": {
       "title": "لا توجد فئات"
+    },
+    "cart": {
+      "title": "سلة التسوق فارغة",
+      "description": "ستظهَر العناصر التي تضيفها إلى السلة هنا."
     }
   },
 
@@ -108,8 +117,9 @@
   },
 
   "product-card": {
-    "add-to-cart": "إضافة إلى العربة",
-    "view-btn": "عرض التفاصيل"
+    "add-to-cart": "إضافة {{number}} إلى العربة",
+    "view-btn": "عرض التفاصيل",
+    "login-required": "يلزم تسجيل الدخول"
   },
 
   "users-page": {
@@ -123,7 +133,8 @@
       "company": "الشركة",
       "address": "العنوان",
       "no-users": "لم يتم العثور على مستخدمين",
-      "rows-per-page": "عدد الصفوف في الصفحة"
+      "rows-per-page": "عدد الصفوف في الصفحة",
+      "all": "الكل"
     }
   },
 
@@ -211,6 +222,20 @@
     },
 
     "logged-success": "تم تسجيل الدخول بنجاح"
+  },
+
+  "cart-page": {
+    "title": "سلة التسوق",
+    "items": "عناصر",
+    "unit-price": "سعر الوحدة",
+    "order-summary": "ملخص الطلب",
+    "total-products": "إجمالي المنتجات",
+    "total-quantity": "إجمالي الكمية",
+    "subtotal": "المجموع الفرعي",
+    "discount-savings": "إجمالي الخصم",
+    "total": "الإجمالي",
+    "proceed": "المتابعة لإتمام الشراء",
+    "added-message": "{{name}} اضيف للعربة"
   },
 
   "preference-dialog": {

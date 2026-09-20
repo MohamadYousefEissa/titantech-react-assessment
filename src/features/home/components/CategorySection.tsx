@@ -1,4 +1,7 @@
-import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
+import {
+  ProductCard,
+  ProductCardSkeleton,
+} from "@/features/products/components/ProductCard";
 import { Skeleton } from "@mui/material";
 import { ApiErrorFallback } from "@/components/ErrorFallback";
 import { useGetProductsByCategoryQuery } from "@/features/products/ProductsService";

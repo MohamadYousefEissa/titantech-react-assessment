@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { HomeHeroSection } from "./components/HeroSection";
-import { PreferenceDialog } from "@/components/PreferenceDialog";
+import { PreferenceDialog } from "@/features/home/components/PreferenceDialog";
 import { useContext } from "react";
 import { PreferenceContext } from "@/contexts/preference-context";
 import { HomeCategorySection } from "./components/CategorySection";

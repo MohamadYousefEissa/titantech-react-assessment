@@ -10,7 +10,7 @@ export const ProductsPagination = ({ count }: { count: number }) => {
 
   const handleChange = (val: number) => {
     dispatch(updateProductsPage(val));
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   return (

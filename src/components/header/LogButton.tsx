@@ -34,11 +34,19 @@ export const LogButton = () => {
   if (user)
     return (
       <>
-        <Tooltip title={t("header.logout")}>
+        <Tooltip title={t("header.logout")} className="max-lg:hidden!">
           <IconButton onClick={handleOpen} color="error">
             <LogoutIcon fontSize="small" className="rtl:rotate-180" />
           </IconButton>
         </Tooltip>
+        <Button
+          onClick={handleOpen}
+          color="error"
+          startIcon={<LogoutIcon fontSize="small" className="rtl:rotate-180" />}
+          className="lg:hidden! w-full"
+        >
+          {t("header.logout")}
+        </Button>
         <Dialog
           open={open}
           onClose={handleClose}
@@ -76,6 +84,7 @@ export const LogButton = () => {
       to="/login"
       variant="outlined"
       endIcon={<LoginIcon className="rtl:rotate-180" />}
+      className="w-full"
     >
       {t("header.login")}
     </Button>

@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useColorScheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "./hooks/redux";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { checkUserAuth } from "./features/auth/AuthSlice";
+import { getUserCart } from "./features/cart/CartSlice";
 
 const ScrollToTop = () => {
   const { pathname, state } = useLocation();
@@ -27,6 +28,7 @@ export default function Root() {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
 
+  const user = useAppSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = useState(true);
 
   const isRTL = i18n.dir() === "rtl";
@@ -34,6 +36,10 @@ export default function Root() {
   useEffect(() => {
     dispatch(checkUserAuth()).then(() => setIsLoading(false));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (user) dispatch(getUserCart(user.id));
+  }, [user, dispatch]);
 
   if (isLoading) return;
 

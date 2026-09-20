@@ -8,7 +8,7 @@ import {
   IconButton,
   Tooltip,
   Paper,
-  Divider,
+  Container,
 } from "@mui/material";
 import {
   Person,
@@ -25,6 +25,7 @@ import {
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { RoleChip } from "../components/RoleChip";
+import { motion } from "motion/react";
 
 export default function SingleUserPage() {
   const { t } = useTranslation();
@@ -62,8 +63,10 @@ export default function SingleUserPage() {
   ];
 
   return (
-    <div className="min-h-screen p-4 md:p-8 mt-40">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <section className="pb-10 pt-30 sm:pt-40">
+      <title>{t("meta.withTitle", { text: user.firstName })}</title>
+
+      <Container className="space-y-6">
         <Paper variant="outlined" className="p-6">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
             <Avatar
@@ -178,7 +181,6 @@ export default function SingleUserPage() {
               label={t("single-user-page.labels.jobTitle")}
               value={user.company?.title}
             />
-            <Divider className="my-2!" />
             <InfoRow
               label={t("single-user-page.labels.companyAddress")}
               value={user.company?.address?.address}
@@ -318,8 +320,8 @@ export default function SingleUserPage() {
             </div>
           </SectionCard>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }
 
@@ -377,11 +379,20 @@ const SectionCard = ({
   icon: React.ReactNode;
   children: React.ReactNode;
 }) => (
-  <Paper variant="outlined" className="p-5">
-    <div className="flex items-center space-x-2 mb-4 pb-2">
-      {icon}
-      <h3 className="text-lg font-semibold tracking-wide">{title}</h3>
-    </div>
-    <div className="space-y-1">{children}</div>
-  </Paper>
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{
+      amount: 0.4,
+      once: true,
+    }}
+  >
+    <Paper variant="outlined" className="p-5 h-full">
+      <div className="flex items-center space-x-2 mb-4 pb-2">
+        {icon}
+        <h3 className="text-lg font-semibold tracking-wide">{title}</h3>
+      </div>
+      <div className="space-y-1">{children}</div>
+    </Paper>
+  </motion.div>
 );

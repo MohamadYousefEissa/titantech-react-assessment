@@ -1,0 +1,11 @@
+# Allow all search engines to crawl all public pages
+User-agent: *
+Allow: /
+
+# Prevent search engines from crawling admin or private routes
+Disallow: /cart/
+# Disallow: /dashboard/
+# Disallow: /account/
+
+# Point search engines to your sitemap (update with your domain)
+# Sitemap: https://www.yourdomain.com/sitemap.xml

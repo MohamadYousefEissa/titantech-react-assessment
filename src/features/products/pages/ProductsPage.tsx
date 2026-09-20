@@ -1,5 +1,8 @@
 import { ApiErrorFallback } from "@/components/ErrorFallback";
-import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
+import {
+  ProductCard,
+  ProductCardSkeleton,
+} from "@/features/products/components/ProductCard";
 import { ProductSearchInput } from "@/features/products/components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useSearchForProductsQuery } from "@/features/products/ProductsService";
@@ -13,6 +16,8 @@ import { SortFilter } from "../components/filter/SortFilter";
 import { useEffect } from "react";
 import { resetFilterAndSearchValue } from "../ProductsSlice";
 import ClearIcon from "@mui/icons-material/Clear";
+import { motion } from "motion/react";
+import { parentVariants, variants } from "@/utils/motion";
 
 const LIMIT = 20;
 
@@ -79,50 +84,72 @@ export default function ProductsPage() {
   };
 
   return (
-    <section className="pt-30 sm:pt-40 pb-10 sm:pb-20">
+    <section className="pt-30 sm:pt-40 pb-10">
+      <title>{t("meta.withTitle", { text: t("header.links.products") })}</title>
+      <meta name="description" content={t("products-page.description")} />
+
       <Container>
-        <h1 className="text-3xl sm:text-4xl font-bold">
-          <Trans
-            i18n={i18n}
-            i18nKey="products-page.title"
-            components={{
-              highlight: <span className="text-primary" />,
-            }}
-          />
-        </h1>
-        <p className="mt-4 max-w-2xl sm:text-lg text-muted">
-          {t("products-page.description")}
-        </p>
-        <div className="mt-8">
-          <ProductSearchInput />
-        </div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={parentVariants}
+        >
+          <motion.h1
+            variants={variants}
+            className="text-3xl sm:text-4xl font-bold"
+          >
+            <Trans
+              i18n={i18n}
+              i18nKey="products-page.title"
+              components={{
+                highlight: <span className="text-primary" />,
+              }}
+            />
+          </motion.h1>
+          <motion.p
+            variants={variants}
+            className="mt-4 max-w-2xl sm:text-lg text-muted"
+          >
+            {t("products-page.description")}
+          </motion.p>
+          <motion.div variants={variants} className="mt-8">
+            <ProductSearchInput />
+          </motion.div>
 
-        <div className="flex gap-4 items-center mt-4 overflow-x-auto scrollbar-none">
-          <p className="text-sm font-light text-muted text-nowrap">
-            <FilterIcon style={{ fontSize: "16px" }} />{" "}
-            {t("products-page.filters")}:
-          </p>
-          <ProductsCategoriesFilter />
-          <SortFilter isLoading={isLoading} />
-          {(searchInputValue.length > 0 || category || sort !== "newest") && (
-            <Button
-              startIcon={<ClearIcon style={{ fontSize: "16px" }} />}
-              onClick={() => dispatch(resetFilterAndSearchValue())}
+          <motion.div
+            variants={variants}
+            className="flex gap-4 items-center mt-4 overflow-x-auto scrollbar-none"
+          >
+            <p className="text-sm font-light text-muted text-nowrap">
+              <FilterIcon style={{ fontSize: "16px" }} />{" "}
+              {t("products-page.filters")}:
+            </p>
+            <ProductsCategoriesFilter />
+            <SortFilter isLoading={isLoading} />
+            {(searchInputValue.length > 0 || category || sort !== "newest") && (
+              <Button
+                startIcon={<ClearIcon style={{ fontSize: "16px" }} />}
+                onClick={() => dispatch(resetFilterAndSearchValue())}
+              >
+                {t("products-page.clear")}
+              </Button>
+            )}
+          </motion.div>
+
+          {data && (
+            <motion.p
+              variants={variants}
+              className="mt-10 font-light text-sm text-muted"
             >
-              {t("products-page.clear")}
-            </Button>
+              {t("products-page.pagination-text", {
+                start,
+                end,
+                total: data?.total,
+              })}
+            </motion.p>
           )}
-        </div>
-
-        {data && (
-          <p className="mt-10 font-light text-sm text-muted">
-            {t("products-page.pagination-text", {
-              start,
-              end,
-              total: data?.total,
-            })}
-          </p>
-        )}
+        </motion.div>
 
         {content()}
 

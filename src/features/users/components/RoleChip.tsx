@@ -3,8 +3,8 @@ import { AdminPanelSettings } from "@mui/icons-material";
 import { Chip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-const roleColorMap: Record<UserRole, "error" | "primary" | "default"> = {
-  admin: "error",
+const roleColorMap: Record<UserRole, "warning" | "primary" | "default"> = {
+  admin: "warning",
   moderator: "primary",
   user: "default",
 };

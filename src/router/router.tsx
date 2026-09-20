@@ -18,6 +18,7 @@ const UsersPage = lazy(() => import("@/features/users/pages/UsersPage"));
 const SingleUserPage = lazy(
   () => import("@/features/users/pages/SingleUserPage"),
 );
+const CartPage = lazy(() => import("@/features/cart/CartPage"));
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "/users", element: <UsersPage /> },
           { path: "/users/:id", element: <SingleUserPage /> },
+          { path: "/cart", element: <CartPage /> },
         ],
       },
 

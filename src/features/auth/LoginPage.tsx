@@ -68,6 +68,8 @@ export const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
+      <title>{t("meta.withTitle", { text: t("header.login") })}</title>
+
       <Card variant="outlined" className="w-full max-w-md p-8">
         <div className="flex flex-col items-center mb-8 text-center">
           <h1 className="text-2xl font-bold">{t("login-page.title")}</h1>

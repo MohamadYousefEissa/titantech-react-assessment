@@ -1,6 +1,6 @@
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Button, Container, IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Badge, Button, Container, IconButton } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -10,13 +10,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useAppSelector } from "@/hooks/redux";
 import LogoImg from "@/assets/images/shopware-logo.svg";
+import CartIcon from "@mui/icons-material/ShoppingCart";
 
 const SCROLL_THRESHOLD = 80;
 
 export default function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const location = useLocation();
 
   const user = useAppSelector((state) => state.auth.user);
+  const cart = useAppSelector((state) => state.cart.cart);
 
   const [isMobileNavOpened, setIsMobileNavOpened] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,12 +55,10 @@ export default function Header() {
   }, [handleScroll]);
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsMobileNavOpened(false);
-    };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, []);
+    setTimeout(() => {
+      setIsMobileNavOpened(false);
+    });
+  }, [location.pathname]);
 
   useEffect(() => {
     if (isMobileNavOpened)
@@ -67,6 +68,31 @@ export default function Header() {
       document.body.classList.remove("max-lg:overflow-hidden");
     };
   }, [isMobileNavOpened]);
+
+  const CartLink = (
+    <IconButton color="inherit" component={Link} to="/cart">
+      <CartIcon fontSize="small" />
+      <Badge
+        badgeContent={cart?.totalQuantity}
+        color="primary"
+        overlap="circular"
+        style={{
+          top: "-12px",
+          right: i18n.dir() === "rtl" ? "-25px" : "-6px",
+        }}
+        slotProps={{
+          badge: {
+            style: {
+              padding: 0,
+              minWidth: "14px",
+              height: "14px",
+              fontSize: "9px",
+            },
+          },
+        }}
+      />
+    </IconButton>
+  );
 
   return (
     <header className="fixed w-full top-0 left-0 z-10 mui-fixed">
@@ -78,11 +104,9 @@ export default function Header() {
       >
         <Container>
           <div className="flex lg:grid justify-between grid-cols-3 items-center">
-            <div className="text-xl font-bold">
-              <Link to="/">
-                <img src={LogoImg} alt="logo" className="w-30 sm:w-40" />
-              </Link>
-            </div>
+            <Link to="/" className="hover:opacity-80 w-fit">
+              <img src={LogoImg} alt="logo" className="w-30 sm:w-40" />
+            </Link>
 
             <ul
               className={cn(
@@ -103,7 +127,7 @@ export default function Header() {
                       fullWidth
                       component={Link}
                       to={l.to}
-                      color="inherit"
+                      color={location.pathname === l.to ? "primary" : "inherit"}
                       variant="text"
                       onClick={() => setIsMobileNavOpened(false)}
                       className={cn(
@@ -116,11 +140,15 @@ export default function Header() {
                   </li>
                 ),
               )}
+              <li className="mt-auto w-full lg:hidden mb-5">
+                <LogButton />
+              </li>
             </ul>
 
             <div className="lg:hidden flex items-center">
               <ThemeSwitcher />
               <LanguageSelector />
+              {CartLink}
               <IconButton
                 color="inherit"
                 onClick={() => setIsMobileNavOpened((prev) => !prev)}
@@ -132,8 +160,14 @@ export default function Header() {
             <div className="max-lg:hidden flex items-center justify-self-end">
               <ThemeSwitcher />
               <LanguageSelector />
-
-              <span className="ltr:ml-4 rtl:mr-4">
+              {user && (
+                <>
+                  <span className="mx-4 h-3 w-px bg-muted" />
+                  {CartLink}
+                </>
+              )}
+              <span className="mx-4 h-3 w-px bg-muted" />
+              <span className={user ? "" : "ltr:ml-4 rtl:mr-4"}>
                 <LogButton />
               </span>
             </div>

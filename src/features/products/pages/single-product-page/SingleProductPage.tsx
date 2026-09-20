@@ -5,6 +5,7 @@ import {
   CircularProgress,
   Container,
   Rating,
+  Tooltip,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../ProductsService";
@@ -18,15 +19,21 @@ import ShipIcon from "@mui/icons-material/LocalShipping";
 import ShieldIcon from "@mui/icons-material/SafetyCheck";
 import { useTranslation } from "react-i18next";
 import { SingleProductDetailsTabs } from "./components/DetailsTabs";
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { updateCart } from "@/features/cart/CartSlice";
+import { toast } from "react-toastify";
 
 export default function SingleProductPage() {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const params = useParams();
 
   const id = params.id as string;
 
   const user = useAppSelector((state) => state.auth.user);
+  const { cart, isLoading: isLoadingCart } = useAppSelector(
+    (state) => state.cart,
+  );
 
   const {
     data: product,
@@ -51,14 +58,32 @@ export default function SingleProductPage() {
       </div>
     );
 
-  if (isError)
+  if (isError || !product)
     return (
       <div className="flex justify-center items-center h-screen">
         <ApiErrorFallback refetch={refetch} />
       </div>
     );
 
-  if (!product) return;
+  const addToCartHandler = async () => {
+    if (!cart || !user) return;
+
+    const addedProduct = { id: product.id, quantity };
+
+    await dispatch(
+      updateCart({
+        userId: user.id,
+        products:
+          [addedProduct, ...cart.products].map(({ id, quantity }) => ({
+            id,
+            quantity,
+          })) || [],
+      }),
+    ).unwrap();
+    toast.success(
+      t("cart-page.added-message", { name: `${quantity} ${product.title}` }),
+    );
+  };
 
   const priceAfterDiscount =
     product.discountPercentage &&
@@ -70,6 +95,9 @@ export default function SingleProductPage() {
 
   return (
     <section className="pt-30 sm:pt-40 pb-10 sm:pb-20">
+      <title>{t("meta.withTitle", { text: product.title })}</title>
+      <meta name="description" content={product.description} />
+
       <Container>
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <ProductImagesCarousel slides={product.images} />
@@ -160,7 +188,7 @@ export default function SingleProductPage() {
 
             <hr className="my-6 text-black/10 dark:text-white/10" />
 
-            {product.availabilityStatus !== "Out of Stock" && user && (
+            {product.availabilityStatus !== "Out of Stock" && (
               <section>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="text font-bold">
@@ -175,6 +203,7 @@ export default function SingleProductPage() {
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
                   <NumberSpinner
+                    disabled={!user}
                     aria-label="quantity"
                     size="small"
                     min={product.minimumOrderQuantity}
@@ -194,16 +223,47 @@ export default function SingleProductPage() {
                 </div>
 
                 <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Button
-                    variant="contained"
-                    size="large"
-                    startIcon={<CartIcon />}
+                  <Tooltip
+                    slotProps={{
+                      tooltip: user
+                        ? { style: { display: "none" } }
+                        : undefined,
+                    }}
+                    title={t("product-card.login-required")}
                   >
-                    {t("single-product-page.add-to-cart")}
-                  </Button>
-                  <Button variant="outlined" size="large">
-                    {t("single-product-page.buy-now")}
-                  </Button>
+                    <div>
+                      <Button
+                        disabled={!user}
+                        loading={isLoadingCart}
+                        variant="contained"
+                        size="large"
+                        startIcon={<CartIcon />}
+                        className="w-full"
+                        onClick={addToCartHandler}
+                      >
+                        {t("single-product-page.add-to-cart")}
+                      </Button>
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    slotProps={{
+                      tooltip: user
+                        ? { style: { display: "none" } }
+                        : undefined,
+                    }}
+                    title={t("product-card.login-required")}
+                  >
+                    <div>
+                      <Button
+                        disabled={!user}
+                        variant="outlined"
+                        size="large"
+                        className="w-full"
+                      >
+                        {t("single-product-page.buy-now")}
+                      </Button>
+                    </div>
+                  </Tooltip>
                 </div>
                 <hr className="my-6 text-black/10 dark:text-white/10" />
               </section>

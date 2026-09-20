@@ -1,7 +1,8 @@
 import { Button, Container } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-// import HeroImage from "@/assets/images/";
+import { motion } from "motion/react";
+import { parentVariants, variants } from "@/utils/motion";
 
 export const HomeHeroSection = () => {
   const { t } = useTranslation();
@@ -9,19 +10,33 @@ export const HomeHeroSection = () => {
   return (
     <section className="h-dvh flex items-center gap-10 max-sm:mt-10">
       <Container>
-        <div>
-          <h1 className="text-5xl sm:text-6xl leading-tight font-bold">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={parentVariants}
+        >
+          <motion.h1
+            variants={variants}
+            className="text-5xl sm:text-6xl leading-tight font-bold"
+          >
             <span className="block">{t("home.hero.everything")}</span>
             <span className="block text-primary">
               {t("home.hero.delivered")}
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg max-w-xl mt-5 text-muted">
+          <motion.p
+            variants={variants}
+            className="text-lg max-w-xl mt-5 text-muted"
+          >
             {t("home.hero.description")}
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <motion.div
+            variants={variants}
+            className="mt-10 flex flex-wrap items-center gap-4"
+          >
             <Button
               component={Link}
               to="/products"
@@ -33,9 +48,8 @@ export const HomeHeroSection = () => {
             <Button variant="outlined" size="large" href="#categories">
               {t("home.hero.browse-btn")}
             </Button>
-          </div>
-        </div>
-        <div className="flex-1">{/* <img src={HeroImage} alt="" /> */}</div>
+          </motion.div>
+        </motion.div>
       </Container>
     </section>
   );
