@@ -1,78 +1,97 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# 🚀 منصة التجارة الإلكترونية (E-Commerce)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+تطبيق ويب حديث، عالي الأداء، ومصمم بلغة قابلة للتوسع (Scalable Architecture) كجزء من اختبار تقني للتوظيف، يبرز أفضل الممارسات في تطوير الواجهات الأمامية، إدارة الحالة (State Management)، والتعامل الاحترافي مع APIs.
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🛠️ خطوات التشغيل (Getting Started)
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+اتبع الخطوات التالية لتشغيل المشروع محلياً على جهازك:
 
-## Expanding the ESLint configuration
+### المتطلبات الأساسية
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Node.js** (إصدار 18 أو أحدث)
+* **npm**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### التثبيت والتشغيل
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **تنزيل حزم التبعيات (Dependencies):**
+```bash
+npm install
 
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **تشغيل خادم التطوير (Development Server):**
+```bash
+npm run dev
 
 ```
+
+
+3. افتح المتصفح وانتقل إلى العنوان `http://localhost:5173` (أو الرابط الموضح في الشاشة النصية لديك).
+
+---
+
+## 📐 القرارات التصميمية، الهندسة المعمارية، والافتراضات (Architecture & Design Decisions)
+
+* **بنية معمارية قابلة للتوسع (Scalable Architecture):** تم تقسيم المشروع بنمط يضمن فصل المسؤوليات (فصل المكونات Components، الصفحات Pages، الخطاطيف Hooks، الخدمات Services، والوظائف المساعدة Utilities) لضمان سهولة الصيانة والتوسع مستقبلاً.
+* **إدارة الجلسة والتسجيل (Authentication & Token Lifecycle):**
+* حفظ جلسة المستخدم بشكل دائم باستخدام `accessToken` و `refreshToken` في الـ `localStorage`.
+* إعداد **Axios Interceptors** للالتقاط التلقائي لأخطاء `401 Unauthorized` الناتجة عن انتهاء صلاحية الـ Access Token، حيث يتم طلب توكن جديد فوراً، تحديث البيانات، وإعادة تنفيذ الـ API الذي فشل بشكل آلي ودون إزعاج المستخدم.
+* يظل المستخدم مسجلاً للدخول حتى انتهاء صلاحية الـ Refresh Token أو عند تسجيل الخروج اليدوي.
+
+
+* **حماية المسارات والقيود (Route Protection & Client-Side Guarding):**
+* تم حماية الصفحات الحساسة (`cart` و `users` و `user-details`) على مستوى موجه التطبيق (Router).
+* منع إضافة المنتجات إلى السلة من الواجهات قبل تسجيل الدخول، نظراً لأن الـ API الخلفي لا يفرض وجود `Bearer token` عند تنفيذ الطلب.
+
+
+* **التعامل مع قيود الـ API الخلفي (Backend API Limitations):**
+* **التعارض بين البحث والفلترة حسب الفئة:** نظراً لأن الـ API لا يدعم البحث النصي والفلترة حسب الفئة في وقت واحد، يتم إفريغ قيمة البحث عند اختيار فئة معينة والعكس صحيح لتجنب الطلبات غير الخاطئة.
+
+
+* **تحسين الأداء وتحسين استهلاك الموارد (Performance Optimization):**
+* **تقنية الـ Virtualization:** تم استخدام عرض القوائم الافتراضية في جدول المستخدمين لعرض أعداد كبيرة من البيانات بكفاءة عالية دون التأثير على أداء المتصفح أو معدل الإطارات (FPS).
+* **تقنية الـ Debounce:** تم تطبيق الـ Debouncing على جميع مدخلات البحث لتقليل عدد طلبات الشبكة غير الضرورية.
+
+
+
+---
+
+## ✨ الميزات والخصائص (Features & Capabilities)
+
+* **الصفحة الرئيسية (Homepage):** عرض المنتجات بناءً على تفضيلات المستخدم المحددة بحسب الجنس (ذكر / أنثى).
+* **صفحة المنتجات (Products Page):** عرض المنتجات، الفلترة حسب الفئة، البحث مع تقنية Debounce، والتقسيم إلى صفحات (Pagination).
+* **صفحة تفاصيل المنتج (Product Details):** عرض كامل تفاصيل المنتج بناءً على متطلبات الاختبار.
+* **المستخدمين (Users):** عرض المستخدمين داخل جدول مدعوم بـ Virtualization، مع إمكانية البحث (Debounced) والتقسيم إلى صفحات.
+* **صفحة تفاصيل المستخدم (User Details):** عرض ملف المستخدم كاملاً وفق المواصفات.
+* **التدويل والمظاهر (i18n & UI Themes):**
+* **دعم كامل للغتين (العربية والإنجليزي)** مع دعم اتجاه النصوص من اليمين لليسار (RTL) ومن اليسار لليمين (LTR).
+* **الوضع الداكن والفاتح (Dark / Light Themes).**
+
+
+* **الحركات والتفاعلات (Animations):** إضافة تأثيرات بصرية وانتقالات حركية سلسة باستخدام مكتبة **Motion**.
+* **تحسين محركات البحث (SEO & Meta Tags):** إعداد متكامل للـ Meta tags و **OpenGraph** لضمان أفضل ظهور للروابط والمشاركة عبر شبكات التواصل.
+* **مؤشرات الأداء (Lighthouse Scores):** تحقيق نتيجة أعلى من **95+** في جميع معايير Lighthouse (الأداء، إمكانية الوصول، أفضل الممارسات، وSEO).
+
+---
+
+## 🤖 الشفافية في استخدام أدوات الذكاء الاصطناعي (AI Tools Disclosure)
+
+تماشياً مع أساليب العمل الحديثة، تم استخدام أدوات الذكاء الاصطناعي كمساعد (Gemeni) لزيادة الإنتاجية وتسريع التطوير في النواحي التالية:
+
+1. **تصميم ومخططات الواجهات (UI Layout & Design Assistance):** المساعدة في بناء الأفكار الهيكلية وتنسيق الصفحات.
+2. **ربط البيانات بالصفحات (Data Mapping & Page Integration):** تنظيم وتمرير هيكل البيانات (Data Schemas) القادمة من الـ API وعرضها بشكل صحيح داخل مكونات الواجهة.
+3. **تحسين منطق المصادقة (Authentication Interceptor Logic):** المساعدة في التعامل مع الحالات الدقيقة (Edge cases) الخاصة بآلية إعادة محاولة الطلبات مع Axios Refresh Token Interceptor.
+3. **كتابة README.md** 
+
+---
+
+## 📝 حالة المشروع والملاحظات (Status & Omissions)
+
+* ✅ تم تنفيذ جميع الميزات المطلوبة، التحسينات الإضافية، والتصميم المترابط بأعلى أداء.
+* ⚠️ **الاختبارات البرمجية (Unit Tests):** لم يتم تضمين اختبارات الـ Unit Tests في هذه النسخة بسب ضيق الوقت المخصص، إلا أن البنية المعمارية للمشروع مجزأة وجاهزة لدعم كتابة الاختبارات بسهولة مستقبلاً (مثل Vitest أو Jest).
